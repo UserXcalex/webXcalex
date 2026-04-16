@@ -184,23 +184,26 @@
       border: 1px solid #e2e8f0;
       border-radius: 16px 16px 16px 4px;
       box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      width: fit-content;
     }
     #xaia-footer {
-      padding: 14px;
-      border-top: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      border-top: 1px solid #f1f5f9;
       background: #ffffff;
     }
     #xaia-form {
       display: flex;
-      gap: 8px;
-      background: #f1f5f9;
-      padding: 6px;
+      gap: 10px;
+      background: #f8fafc;
+      padding: 4px 6px;
       border-radius: 24px;
       border: 1px solid #e2e8f0;
+      transition: all 0.2s;
     }
     #xaia-form:focus-within {
       border-color: ${config.primaryColor};
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
     }
     #xaia-input {
       flex: 1;
@@ -208,8 +211,9 @@
       border: none;
       background: transparent;
       outline: none;
-      font-size: 16px; /* 16px impide zoom en iOS Safari */
+      font-size: 15px;
       color: #0f172a;
+      font-family: inherit;
     }
     #xaia-input::placeholder {
       color: #94a3b8;
@@ -257,21 +261,24 @@
     }
     .xaia-typing-container {
       display: flex;
-      gap: 4px;
-      padding: 6px 4px;
+      gap: 5px;
+      padding: 4px 2px;
+      align-items: center;
+      height: 12px;
     }
     .xaia-typing-dot {
-      width: 6px;
-      height: 6px;
-      background: #94a3b8;
+      width: 7px;
+      height: 7px;
+      background: #cbd5e1;
       border-radius: 50%;
-      animation: xaia-bounce 1.4s infinite ease-in-out both;
+      animation: xaia-pulse 1.4s infinite ease-in-out both;
     }
-    .xaia-typing-dot:nth-child(1) { animation-delay: -0.32s; }
-    .xaia-typing-dot:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes xaia-bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1); }
+    .xaia-typing-dot:nth-child(1) { animation-delay: 0s; }
+    .xaia-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .xaia-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes xaia-pulse {
+      0%, 100% { transform: scale(0.8); opacity: 0.4; }
+      50% { transform: scale(1.2); opacity: 1; background: ${config.primaryColor}; }
     }
     
     @media (max-width: 480px) {

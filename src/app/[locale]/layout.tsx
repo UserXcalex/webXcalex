@@ -45,7 +45,7 @@ export default async function LocaleLayout({
         >
           <div id="theme-reveal-overlay" aria-hidden="true" />
           {children}
-          <ChatBot />
+          {/* <ChatBot /> */}
         </NextIntlClientProvider>
         <Script
           src="https://web-xcalex.vercel.app/xaia-widget.js"
