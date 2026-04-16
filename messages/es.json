@@ -1,0 +1,301 @@
+{
+  "Navbar": {
+    "servicios": "Servicios",
+    "soluciones": "Soluciones",
+    "proceso": "Proceso",
+    "casos_de_exito": "Casos de Éxito",
+    "nosotros": "Nosotros",
+    "contacto": "Contacto",
+    "consultoria": "Consultoría",
+    "reserva_consultoria": "Reserva una Consultoría"
+  },
+  "Hero": {
+    "badge": "Socio Tecnológico de Élite",
+    "build": "Construye",
+    "smart": "Inteligente",
+    "with_xcalex": "Con Xcalex.",
+    "description": "Diseñamos, desarrollamos y escalamos software a medida, sistemas de IA y plataformas digitales de alto rendimiento para marcas ambiciosas.",
+    "cta_consulting": "Consultoría",
+    "cta_capabilities": "Capacidades",
+    "scroll": "Scroll",
+    "phrases": {
+      "infra": "Infraestructura Digital",
+      "software": "Software a Medida",
+      "ai": "Sistemas de IA",
+      "platforms": "Plataformas Escalables",
+      "experiences": "Experiencias Digitales"
+    },
+    "trust": {
+      "execution": "Ejecución Rápida",
+      "custom": "Sistemas a Medida",
+      "architecture": "Arquitectura Escalable",
+      "brands": "Confianza de Marcas Elite"
+    }
+  },
+  "Services": {
+    "badge": "Nuestras Capacidades",
+    "title_start": "Construimos el Futuro de tu",
+    "title_accent": "Infraestructura Digital",
+    "description": "Soluciones end-to-end diseñadas para escalar empresas que no se conforman con lo convencional.",
+    "items": {
+      "software": {
+        "title": "Desarrollo de Software a Medida",
+        "desc": "Sistemas personalizados de extremo a extremo diseñados en torno a tu lógica operativa, flujos de trabajo y requisitos de escalabilidad a largo plazo.",
+        "tag": "Ingeniería"
+      },
+      "ai": {
+        "title": "Automatización con IA",
+        "desc": "Flujos de automatización inteligente, integraciones de LLM y sistemas de decisión impulsados por IA que reducen la fricción y aumentan el rendimiento.",
+        "tag": "Inteligencia Artificial"
+      },
+      "web": {
+        "title": "Plataformas Web",
+        "desc": "Productos digitales de alto rendimiento, desde SaaS hasta portales empresariales, construidos sobre arquitecturas modernas y escalables.",
+        "tag": "Producto"
+      },
+      "ux": {
+        "title": "Sistemas UX / UI",
+        "desc": "Sistemas de diseño y patrones de interacción enfocados a la conversión, la claridad y una percepción de marca premium a escala.",
+        "tag": "Diseño"
+      },
+      "crm": {
+        "title": "CRM y Herramientas Internas",
+        "desc": "Infraestructura interna — tableros, CRM y herramientas operativas — diseñadas precisamente para las necesidades de tu equipo.",
+        "tag": "Operaciones"
+      },
+      "growth": {
+        "title": "Infraestructura de Crecimiento",
+        "desc": "Ecosistemas digitales alineados con tus objetivos de facturación: embudos de adquisición, analítica y capas de alto rendimiento.",
+        "tag": "Crecimiento"
+      }
+    }
+  },
+  "WhyXcalex": {
+    "badge": "Nuestros Diferenciadores",
+    "title_start": "Expertos en",
+    "title_accent": "Escalar",
+    "title_end": "Complejidad.",
+    "desc1": "No somos solo una agencia; somos una extensión de tu equipo de ingeniería diseñada para devorar problemas técnicos difíciles.",
+    "desc2": "La mayoría de las agencias ejecutan tareas. Nosotros diseñamos resultados. Cada proyecto comienza con una comprensión clara de dónde quieres estar, y construimos el camino exacto para llegar allí.",
+    "cta": "Consulta Estratégica",
+    "items": {
+      "strategy": {
+        "title": "Pensamiento Estratégico Primero",
+        "desc": "Empezamos con tus objetivos de negocio, no con tu stack tecnológico. Cada decisión está anclada a resultados comerciales."
+      },
+      "speed": {
+        "title": "Velocidad Sin Caos",
+        "desc": "Avanzamos rápido porque planificamos con rigor. Sprints estructurados, comunicación clara y cero sorpresas."
+      },
+      "scaling": {
+        "title": "Arquitectura Escalable",
+        "desc": "Sistemas diseñados para crecer contigo, desde 10 usuarios hasta 10 millones, sin reconstrucciones costosas."
+      },
+      "design": {
+        "title": "Ejecución de Diseño Premium",
+        "desc": "Cada interfaz que entregamos es un activo de marca. El diseño no es decoración: impulsa la conversión y la retención."
+      },
+      "business": {
+        "title": "Desarrollo Enfocado al Negocio",
+        "desc": "Hablamos el lenguaje ejecutivo e ingeniero. Las soluciones se evalúan por su ROI, no solo por su elegancia técnica."
+      },
+      "automation": {
+        "title": "Mentalidad Pro-Automatización",
+        "desc": "Identificamos la fricción manual y la eliminamos sistemáticamente, liberando a tus equipos para operar al máximo nivel."
+      }
+    }
+  },
+  "Process": {
+    "badge": "Nuestro Proceso",
+    "title": "Simple, fluido, eficiente.",
+    "cta": "Reserva una llamada",
+    "steps": {
+      "step1": {
+        "num": "PASO 1",
+        "title": "Llamada de Exploración",
+        "desc": "Cuéntanos sobre tu negocio en una sesión de descubrimiento. Discutiremos la estructura del equipo, el enfoque técnico, métricas de éxito, plazos, presupuesto y los perfiles necesarios para determinar cómo podemos ayudarte."
+      },
+      "step2": {
+        "num": "PASO 2",
+        "title": "Solución y Estructura",
+        "desc": "En cuestión de días, finalizaremos las especificaciones técnicas de tu proyecto, acordaremos un modelo estratégico de trabajo cooperativo, y seleccionaremos e integraremos a tu célula de ingeniería dedicada."
+      },
+      "step3": {
+        "num": "PASO 3",
+        "title": "Ejecución y Monitoreo",
+        "desc": "Una vez establecidos y confirmados los hitos, pasamos a la acción de inmediato. Monitoreamos el progreso, entregamos reportes constantes en tiempo real y nos adaptamos dinámicamente a tus necesidades."
+      }
+    }
+  },
+  "CaseStudies": {
+    "badge": "Casos de Éxito",
+    "title": "Proyectos Que Marcaron la Diferencia",
+    "description": "Proyectos reales. Resultados medibles. Soluciones de impacto directo.",
+    "items": {
+      "fintech": {
+        "industry": "Fintech",
+        "title": "Re-arquitectura de plataforma de pagos con 99.95% de disponibilidad.",
+        "desc": "Un procesador de pagos regional reemplazó un monolito de una década: microservicios en AWS, API gateway personalizada y migración en 60 días sin interrupción. $1.2M ahorrados en infraestructura anual.",
+        "tags": ["AWS", "Microservicios"]
+      },
+      "saas": {
+        "industry": "Operaciones / SaaS",
+        "title": "Incorporación de clientes reducida de 4 días a solo 6 horas.",
+        "desc": "Motor de incorporación inteligente con análisis de documentos por IA, flujos de validación automatizados y portal de cliente en tiempo real. NPS mejoró 28 puntos. Rotación de clientes bajó 35%.",
+        "tags": ["IA Generativa", "Automatización"]
+      },
+      "ecommerce": {
+        "industry": "E-Commerce",
+        "title": "Headless Commerce que soporta 10k usuarios concurrentes sin caída.",
+        "desc": "Frontend en Next.js, capa API con caché en el borde y CMS personalizado para equipos de marketing. Cero inactividad en picos de ventas. Conversión mejoró 2.1x. Cargas 38% más rápidas.",
+        "tags": ["Next.js", "Edge Caching"]
+      }
+    }
+  },
+  "Metrics": {
+    "badge": "Resultados Destacados",
+    "title": "Resultados Que Hablan por Sí Solos",
+    "items": {
+      "launch": {
+        "label": "Lanzamientos más Rápidos",
+        "sub": "Reducción promedio de tiempo al mercado.",
+        "circle": "LANZAMIENTOS MÁS RÁPIDOS · XCALEX · "
+      },
+      "friction": {
+        "label": "Menos Fricción Operativa",
+        "sub": "Reducción de carga operativa manual.",
+        "circle": "MENOS FRICCIÓN OPERATIVA · XCALEX · "
+      },
+      "sla": {
+        "label": "SLA de Disponibilidad",
+        "sub": "Garantizado en todas las plataformas.",
+        "circle": "SLA DE DISPONIBILIDAD · XCALEX · "
+      },
+      "delivered": {
+        "label": "Sistemas Entregados",
+        "sub": "Plataformas empresariales de primer nivel.",
+        "circle": "SISTEMAS DELIVERADOS · XCALEX · "
+      }
+    }
+  },
+  "FinalCTA": {
+    "badge": "¿Listo Para Construir?",
+    "title_start": "Diseñemos",
+    "title_accent": "Algo Excepcional",
+    "description": "Ya sea que estés reemplazando un sistema legado, lanzando un nuevo producto, o escalando una plataforma — queremos entender tu desafío y mostrarte cómo trabaja un equipo de élite.",
+    "cta_start": "Empieza Ahora",
+    "cta_talk": "Hablemos",
+    "placeholder_name": "Nombre o Empresa",
+    "placeholder_email": "Correo Electrónico",
+    "btn_submit": "Solicitar Consultoría",
+    "btn_loading": "Enviando...",
+    "btn_success": "¡Requerimiento Enviado!",
+    "error_msg": "Ocurrió un error. Por favor intenta nuevamente.",
+    "footer_msg": "Sin compromiso — Solo resultados estratégicos."
+  },
+  "Footer": {
+    "nav": {
+      "discover": {
+        "title": "Descubre Xcalex",
+        "items": ["Sobre Nosotros", "Metodologías", "Tecnologías", "Certificaciones", "Servicios de Software", "Soluciones de IA", "Staff Augmentation", "Outsourcing"]
+      },
+      "resources": {
+        "title": "Recursos",
+        "items": ["Casos de Éxito", "Centro de IA", "Blog", "Prensa", "Insights de la Industria", "Programa de Referidos"]
+      },
+      "careers": {
+        "title": "Carreras",
+        "items": ["Oportunidades", "Cultura", "Talento"]
+      }
+    },
+    "contact": {
+      "title": "Contacto",
+      "cta": "Reserva una llamada",
+      "socials": "Redes Sociales"
+    },
+    "newsletter": {
+      "desc": "Recibe insights de expertos sobre cómo construir y escalar equipos de tecnología de élite.",
+      "placeholder": "nombre@email.com",
+      "btn_success": "¡Gracias por unirte!",
+      "error_msg": "Ocurrió un error. Intenta de nuevo."
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "do_not_sell": "No vender mi información",
+      "rights": "Todos los derechos reservados."
+    }
+  },
+  "Legal": {
+    "privacy_title": "Política de Privacidad",
+    "terms_title": "Términos de Servicio",
+    "do_not_sell_title": "No Vender mi Información Personal",
+    "intro": "Introducción",
+    "intro_p": "En Xcalex, respetamos su privacidad y estamos comprometidos a proteger sus datos personales. Esta Política de Privacidad describe cómo recopilamos, usamos y compartimos su información cuando utiliza nuestro sitio web y servicios tecnológicos.",
+    "data": "Información que recopilamos",
+    "data_p": "Recopilamos información que usted nos proporciona directamente, como nombre, correo electrónico y detalles de la empresa, así como datos técnicos recopilados automáticamente a través de cookies y tecnologías similares para mejorar su experiencia de usuario.",
+    "usage": "Uso de la información",
+    "usage_p": "Utilizamos su información para proporcionar y mejorar nuestros servicios, comunicarnos con usted sobre proyectos, enviar actualizaciones de marketing (si ha otorgado su consentimiento) y garantizar la seguridad de nuestra plataforma.",
+    "rights": "Sus derechos",
+    "rights_p": "Usted tiene derecho a acceder, corregir o eliminar sus datos personales. Si desea ejercer estos derechos o tiene preguntas sobre nuestra gestión de datos, puede contactarnos en legal@xcalex.com.",
+    "updates": "Actualizaciones",
+    "updates_p": "Podemos actualizar esta política ocasionalmente. Le notificaremos cualquier cambio material publicando la nueva Política de Privacidad en este sitio.",
+    "acceptance": "Aceptación de los Términos",
+    "acceptance_p": "Al acceder o utilizar los servicios de Xcalex, usted acepta estar sujeto a estos Términos de Servicio y a todas las leyes y regulaciones aplicables.",
+    "utilization": "Uso de los Servicios",
+    "utilization_p": "Nuestros servicios están diseñados para uso empresarial. Usted acepta no utilizar la plataforma para ninguna actividad ilegal o de manera que comprometa la integridad de nuestra infraestructura.",
+    "property": "Propiedad Intelectual",
+    "property_p": "Todo el software, diseños y contenido proporcionado por Xcalex están protegidos por leyes de propiedad intelectual. Su uso de los servicios no le otorga la propiedad de nuestra tecnología.",
+    "liability": "Limitación de Responsabilidad",
+    "liability_p": "Xcalex no será responsable por daños indirectos, incidentales o consecuentes que resulten del uso o la imposibilidad de usar nuestras soluciones tecnológicas.",
+    "law": "Ley Aplicable",
+    "law_p": "Estos términos se rigen por las leyes de la jurisdicción donde Xcalex está registrada, sin tener en cuenta sus disposiciones sobre conflictos de leyes.",
+    "opt_out": "Solicitud de Exclusión",
+    "what_this_means": "¿Qué significa esto?",
+    "what_this_means_p": "Valoramos su privacidad. De acuerdo con las regulaciones de privacidad, usted tiene derecho a optar por la exclusión voluntaria de la 'venta' o 'intercambio' de su información personal a terceros.",
+    "opt_out_desc": "Si desea ejercer su derecho a la exclusión voluntaria, complete el formulario a continuación o envíenos un correo electrónico.",
+    "contact": "Contacto"
+  },
+  "Authority": {
+    "badge": "Nuestra Posición",
+    "quote_p1": "La mayoría de las empresas no necesitan otro proveedor.",
+    "quote_p2": "Necesitan un socio que entienda que el software es un activo estratégico.",
+    "team": "Equipo Directivo Xcalex",
+    "role": "Socio Tecnológico Estratégico",
+    "pillars": {
+      "philosophy": {
+        "title": "Filosofía",
+        "desc": "Creemos que el software bien diseñado es un multiplicador de negocios. Cada decisión arquitectónica que tomamos se evalúa bajo esa perspectiva."
+      },
+      "alliance": {
+        "title": "Modelo de Alianza",
+        "desc": "Operamos como socios integrados, no como proveedores transaccionales. Alineamos nuestro éxito con el tuyo y nos hacemos responsables de los resultados."
+      },
+      "standards": {
+        "title": "Estándares",
+        "desc": "Calidad de nivel de producción, revisión rigurosa, documentación completa y una intolerancia absoluta a la deuda técnica."
+      }
+    }
+  },
+  "Booking": {
+    "title": "Reserva tu llamada",
+    "description": "Completa el formulario y nos contactaremos contigo",
+    "labels": {
+      "name": "Nombre completo",
+      "phone": "Teléfono",
+      "email": "Correo electrónico"
+    },
+    "placeholders": {
+      "name": "Tu nombre completo",
+      "phone": "Número de teléfono",
+      "email": "tu@email.com"
+    },
+    "status": {
+      "error": "Por favor, completa todos los campos correctamente.",
+      "success": "¡Gracias! Nos pondremos en contacto contigo pronto.",
+      "submitting": "Enviando...",
+      "sent": "¡Enviado!",
+      "submit": "Reservar llamada"
+    }
+  }
+}

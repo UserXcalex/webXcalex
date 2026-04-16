@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================
+   Design Tokens
+   ============================= */
+:root {
+  --bg-deep: #ffffff;
+  --bg-dark: #f8fafc;
+  --bg-darkest: #f1f5f9;
+  --primary: #2563eb;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-subtle: rgba(15, 23, 42, 0.05);
+}
+
+.dark {
+  --bg-deep: #020617;
+  --bg-dark: #0f172a;
+  --bg-darkest: #010409;
+  --primary: #3b82f6;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+}
+
+/* =============================
+   Theme Transition Overlay
+   ============================= */
+#theme-reveal-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--bg-deep);
+  clip-path: circle(0% at 0% 100%);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#theme-reveal-overlay.active {
+  clip-path: circle(150% at 0% 100%);
+}
+
+/* =============================
+   Base
+   ============================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================
+   Navbar glass effect
+   ============================= */
+.glass-nav {
+  background: var(--bg-deep); /* Will be handled by opacity if needed, but let's use rgba for blur */
+  background: color-mix(in srgb, var(--bg-deep), transparent 15%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* =============================
+   Service / Case cards
+   ============================= */
+.card-gradient {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  transition: border-color 0.3s ease, box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease;
+}
+
+.card-gradient:hover {
+  border-color: var(--primary);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.1),
+    0 0 30px rgba(37, 99, 235, 0.03);
+  transform: translateY(-4px);
+}
+
+.dark .card-gradient:hover {
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(37, 99, 235, 0.1);
+}
+
+/* =============================
+   Scroll-reveal animation
+   ============================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================
+   TrustBar marquee
+   ============================= */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* =============================
+   Hero radial glow
+   ============================= */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 60% at 50% 25%,
+    var(--primary) /* opacity handled in code or via color-mix */
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* =============================
+   Subtle scrollbar styling
+   ============================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  opacity: 0.2;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* =============================
+   Selection highlight
+   ============================= */
+::selection {
+  background: var(--primary);
+  color: #fff;
+}

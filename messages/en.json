@@ -1,0 +1,301 @@
+{
+  "Navbar": {
+    "servicios": "Services",
+    "soluciones": "Solutions",
+    "proceso": "Process",
+    "casos_de_exito": "Case Studies",
+    "nosotros": "About Us",
+    "contacto": "Contact",
+    "consultoria": "Consulting",
+    "reserva_consultoria": "Book a Consultation"
+  },
+  "Hero": {
+    "badge": "Elite Tech Partner",
+    "build": "Build",
+    "smart": "Smart",
+    "with_xcalex": "With Xcalex.",
+    "description": "We design, develop and scale custom software, AI systems and high-performance digital platforms for ambitious brands.",
+    "cta_consulting": "Consulting",
+    "cta_capabilities": "Capabilities",
+    "scroll": "Scroll",
+    "phrases": {
+      "infra": "Digital Infrastructure",
+      "software": "Custom Software",
+      "ai": "AI Systems",
+      "platforms": "Scalable Platforms",
+      "experiences": "Digital Experiences"
+    },
+    "trust": {
+      "execution": "Fast Execution",
+      "custom": "Custom Systems",
+      "architecture": "Scalable Architecture",
+      "brands": "Elite Brand Trust"
+    }
+  },
+  "Services": {
+    "badge": "Our Capabilities",
+    "title_start": "We Build the Future of your",
+    "title_accent": "Digital Infrastructure",
+    "description": "End-to-end solutions designed to scale companies that don't settle for the conventional.",
+    "items": {
+      "software": {
+        "title": "Custom Software Development",
+        "desc": "End-to-end custom systems designed around your operational logic, workflows and long-term scalability requirements.",
+        "tag": "Engineering"
+      },
+      "ai": {
+        "title": "AI Automation",
+        "desc": "Intelligent automation flows, LLM integrations and AI-driven decision systems that reduce friction and increase performance.",
+        "tag": "Artificial Intelligence"
+      },
+      "web": {
+        "title": "Web Platforms",
+        "desc": "High-performance digital products, from SaaS to enterprise portals, built on modern and scalable architectures.",
+        "tag": "Product"
+      },
+      "ux": {
+        "title": "UX / UI Systems",
+        "desc": "Design systems and interaction patterns focused on conversion, clarity and a premium brand perception at scale.",
+        "tag": "Design"
+      },
+      "crm": {
+        "title": "CRM & Internal Tools",
+        "desc": "Internal infrastructure — dashboards, CRM and operational tools — precisely designed for your team's needs.",
+        "tag": "Operations"
+      },
+      "growth": {
+        "title": "Growth Infrastructure",
+        "desc": "Digital ecosystems aligned with your revenue goals: acquisition funnels, analytics and high-performance layers.",
+        "tag": "Growth"
+      }
+    }
+  },
+  "WhyXcalex": {
+    "badge": "Our Differentiators",
+    "title_start": "Experts in",
+    "title_accent": "Scaling",
+    "title_end": "Complexity.",
+    "desc1": "We are not just an agency; we are an extension of your engineering team designed to devour difficult technical problems.",
+    "desc2": "Most agencies execute tasks. We design results. Every project begins with a clear understanding of where you want to be, and we build the exact path to get there.",
+    "cta": "Strategic Consultation",
+    "items": {
+      "strategy": {
+        "title": "Strategic Thinking First",
+        "desc": "We start with your business goals, not your tech stack. Every decision is anchored to commercial results."
+      },
+      "speed": {
+        "title": "Speed Without Chaos",
+        "desc": "We move fast because we plan with rigor. Structured sprints, clear communication and zero surprises."
+      },
+      "scaling": {
+        "title": "Scalable Architecture",
+        "desc": "Systems designed to grow with you, from 10 users to 10 million, without costly rebuilds."
+      },
+      "design": {
+        "title": "Premium Design Execution",
+        "desc": "Every interface we deliver is a brand asset. Design is not decoration: it drives conversion and retention."
+      },
+      "business": {
+        "title": "Business-Focused Development",
+        "desc": "We speak both executive and engineering languages. Solutions are evaluated by their ROI, not just their technical elegance."
+      },
+      "automation": {
+        "title": "Pro-Automation Mindset",
+        "desc": "We identify manual friction and eliminate it systematically, freeing your teams to operate at the highest level."
+      }
+    }
+  },
+  "Process": {
+    "badge": "Our Process",
+    "title": "Simple, fluid, efficient.",
+    "cta": "Book a call",
+    "steps": {
+      "step1": {
+        "num": "STEP 1",
+        "title": "Exploration Call",
+        "desc": "Tell us about your business in a discovery session. We will discuss team structure, technical approach, success metrics, timelines, budget and the profiles needed to determine how we can help you."
+      },
+      "step2": {
+        "num": "STEP 2",
+        "title": "Solution & Structure",
+        "desc": "In a matter of days, we will finalize your project's technical specifications, agree on a strategic cooperative work model, and select and integrate your dedicated engineering cell."
+      },
+      "step3": {
+        "num": "STEP 3",
+        "title": "Execution & Monitoring",
+        "desc": "Once milestones are established and confirmed, we move to action immediately. We monitor progress, deliver constant real-time reports and adapt dynamically to your needs."
+      }
+    }
+  },
+  "CaseStudies": {
+    "badge": "Case Studies",
+    "title": "Projects That Made a Difference",
+    "description": "Real projects. Measurable results. Direct impact solutions.",
+    "items": {
+      "fintech": {
+        "industry": "Fintech",
+        "title": "Payments platform re-architecture with 99.95% availability.",
+        "desc": "A regional payment processor replaced a decade-old monolith: microservices on AWS, custom API gateway, and 60-day migration without downtime. $1.2M saved in annual infrastructure.",
+        "tags": ["AWS", "Microservices"]
+      },
+      "saas": {
+        "industry": "Operations / SaaS",
+        "title": "Customer onboarding reduced from 4 days to just 6 hours.",
+        "desc": "Intelligent onboarding engine with AI document analysis, automated validation flows, and real-time customer portal. NPS improved by 28 points. Customer churn fell by 35%.",
+        "tags": ["Generative IA", "Automation"]
+      },
+      "ecommerce": {
+        "industry": "E-Commerce",
+        "title": "Headless Commerce supporting 10k concurrent users without crashing.",
+        "desc": "Next.js frontend, API layer with edge caching, and custom CMS for marketing teams. Zero downtime during sales peaks. Conversion improved 2.1x. Loads 38% faster.",
+        "tags": ["Next.js", "Edge Caching"]
+      }
+    }
+  },
+  "Metrics": {
+    "badge": "Key Results",
+    "title": "Results That Speak for Themselves",
+    "items": {
+      "launch": {
+        "label": "Faster Launches",
+        "sub": "Average reduction in time to market.",
+        "circle": "FASTER LAUNCHES · XCALEX · "
+      },
+      "friction": {
+        "label": "Less Operational Friction",
+        "sub": "Reduction in manual operational load.",
+        "circle": "LESS OPERATIONAL FRICTION · XCALEX · "
+      },
+      "sla": {
+        "label": "Availability SLA",
+        "sub": "Guaranteed across all platforms.",
+        "circle": "AVAILABILITY SLA · XCALEX · "
+      },
+      "delivered": {
+        "label": "Systems Delivered",
+        "sub": "World-class enterprise platforms.",
+        "circle": "SYSTEMS DELIVERED · XCALEX · "
+      }
+    }
+  },
+  "FinalCTA": {
+    "badge": "Ready to Build?",
+    "title_start": "Let's Design",
+    "title_accent": "Something Exceptional",
+    "description": "Whether you're replacing a legacy system, launching a new product, or scaling a platform — we want to understand your challenge and show you how an elite team works.",
+    "cta_start": "Start Now",
+    "cta_talk": "Let's Talk",
+    "placeholder_name": "Name or Company",
+    "placeholder_email": "Email Address",
+    "btn_submit": "Request Consulting",
+    "btn_loading": "Sending...",
+    "btn_success": "Requirement Sent!",
+    "error_msg": "An error occurred. Please try again.",
+    "footer_msg": "No commitment — Just strategic results."
+  },
+  "Footer": {
+    "nav": {
+      "discover": {
+        "title": "Discover Xcalex",
+        "items": ["About Us", "Methodologies", "Technologies", "Certifications", "Software Services", "AI Solutions", "Staff Augmentation", "Outsourcing"]
+      },
+      "resources": {
+        "title": "Resources",
+        "items": ["Case Studies", "AI Center", "Blog", "Press", "Industry Insights", "Referral Program"]
+      },
+      "careers": {
+        "title": "Careers",
+        "items": ["Opportunities", "Culture", "Talent"]
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "cta": "Book a Call",
+      "socials": "Social Media"
+    },
+    "newsletter": {
+      "desc": "Receive expert insights on how to build and scale elite technology teams.",
+      "placeholder": "name@email.com",
+      "btn_success": "Thanks for joining!",
+      "error_msg": "An error occurred. Try again."
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "do_not_sell": "Do not sell my info",
+      "rights": "All rights reserved."
+    }
+  },
+  "Legal": {
+    "privacy_title": "Privacy Policy",
+    "terms_title": "Terms of Service",
+    "do_not_sell_title": "Do Not Sell My Personal Information",
+    "intro": "Introduction",
+    "intro_p": "At Xcalex, we respect your privacy and are committed to protecting your personal data. This Privacy Policy describes how we collect, use, and share your information when you use our website and technological services.",
+    "data": "Information we collect",
+    "data_p": "We collect information that you directly provide to us, such as name, email, and company details, as well as technical data collected automatically through cookies and similar technologies to improve your user experience.",
+    "usage": "Use of information",
+    "usage_p": "We use your information to provide and improve our services, communicate with you about projects, send marketing updates (if you have consented), and ensure the security of our platform.",
+    "rights": "Your rights",
+    "rights_p": "You have the right to access, correct, or delete your personal data. If you wish to exercise these rights or have questions about our data management, you can contact us at legal@xcalex.com.",
+    "updates": "Updates",
+    "updates_p": "We may update this policy occasionally. We will notify you of any material changes by posting the new Privacy Policy on this site.",
+    "acceptance": "Acceptance of Terms",
+    "acceptance_p": "By accessing or using Xcalex services, you agree to be bound by these Terms of Service and all applicable laws and regulations.",
+    "utilization": "Use of Services",
+    "utilization_p": "Our services are designed for enterprise use. You agree not to use the platform for any illegal activity or in a way that compromises the integrity of our infrastructure.",
+    "property": "Intellectual Property",
+    "property_p": "All software, designs, and content provided by Xcalex are protected by intellectual property laws. Your use of the services does not grant you ownership of our technology.",
+    "liability": "Limitation of Liability",
+    "liability_p": "Xcalex will not be liable for indirect, incidental, or consequential damages resulting from the use or inability to use our technological solutions.",
+    "law": "Governing Law",
+    "law_p": "These terms are governed by the laws of the jurisdiction where Xcalex is registered, without regard to its conflict of law provisions.",
+    "opt_out": "Opt-Out Request",
+    "what_this_means": "What does this mean?",
+    "what_this_means_p": "We value your privacy. In accordance with privacy regulations, you have the right to opt-out of the 'sale' or 'sharing' of your personal information to third parties.",
+    "opt_out_desc": "If you wish to exercise your right to opt-out, please fill out the form below or send us an email.",
+    "contact": "Contact"
+  },
+  "Authority": {
+    "badge": "Our Position",
+    "quote_p1": "Most companies don't need another vendor.",
+    "quote_p2": "They need a partner who understands that software is a strategic asset.",
+    "team": "Xcalex Executive Team",
+    "role": "Strategic Technological Partner",
+    "pillars": {
+      "philosophy": {
+        "title": "Philosophy",
+        "desc": "We believe that well-designed software is a business multiplier. Every architectural decision we make is evaluated under that perspective."
+      },
+      "alliance": {
+        "title": "Alliance Model",
+        "desc": "We operate as integrated partners, not transactional vendors. We align our success with yours and take responsibility for results."
+      },
+      "standards": {
+        "title": "Standards",
+        "desc": "Production-level quality, rigorous review, complete documentation, and an absolute intolerance for technical debt."
+      }
+    }
+  },
+  "Booking": {
+    "title": "Book Your Call",
+    "description": "Fill out the form and we will contact you shortly",
+    "labels": {
+      "name": "Full Name",
+      "phone": "Phone Number",
+      "email": "Email Address"
+    },
+    "placeholders": {
+      "name": "Your full name",
+      "phone": "Phone number",
+      "email": "you@email.com"
+    },
+    "status": {
+      "error": "Please complete all fields correctly.",
+      "success": "Thanks! We will be in touch with you soon.",
+      "submitting": "Sending...",
+      "sent": "Sent!",
+      "submit": "Book Call"
+    }
+  }
+}
