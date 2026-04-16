@@ -3,7 +3,6 @@
 import { 
   Linkedin, 
   Facebook, 
-  Twitter, 
   Instagram, 
   Youtube, 
   Mail, 
@@ -15,12 +14,26 @@ import { useState } from "react";
 import BookingModal from "./BookingModal";
 import { useTranslations } from "next-intl";
 
+// SVG icons for brands not in lucide-react
+const XIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const TikTokIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z" />
+  </svg>
+);
+
 const socials = [
   { icon: Linkedin, href: "#" },
   { icon: Facebook, href: "#" },
-  { icon: Twitter, href: "#" },
+  { icon: XIcon, href: "#" },
   { icon: Instagram, href: "#" },
   { icon: Youtube, href: "#" },
+  { icon: TikTokIcon, href: "#" },
 ];
 
 export default function Footer() {
@@ -130,7 +143,7 @@ export default function Footer() {
                 </button>
                 <a href="tel:+15551234567" className="flex items-center gap-3 text-slate-900 dark:text-white font-black text-sm hover:text-blue-600 transition-colors pl-2">
                   <Phone size={18} className="text-blue-600" />
-                  +1 (555) 123-4567
+                  +57 (312) 866-3134
                 </a>
               </div>
             </div>

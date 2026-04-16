@@ -73,6 +73,8 @@ function CaseCard({ itemKey, accent, illustration }: { itemKey: string, accent: 
       style={{ boxShadow: hovered ? "0 24px 64px rgba(0,0,0,0.18)" : undefined }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setTimeout(() => setHovered(false), 600)}
     >
       {/* === Dark Reveal Overlay from bottom-right === */}
       <div

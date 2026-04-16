@@ -17,41 +17,67 @@ function CircularMetric({
   index: number;
 }) {
   const id = `cp-${index}`;
-  const size = 240;
-  const cx = size / 2;
-  const cy = size / 2;
-  const r = 104;
+  // Responsive: 160px on mobile, 240px on desktop
+  const mobileSize = 160;
+  const desktopSize = 240;
+  const mobileR = 68;
+  const desktopR = 104;
 
   return (
-    <div className="flex flex-col items-center gap-4 group cursor-pointer">
-      {/* Circle + rotating text */}
-      <div className="relative" style={{ width: size, height: size }}>
-        {/* Rotating SVG text */}
+    <div className="flex flex-col items-center gap-3 group cursor-pointer w-full">
+      {/* Circle + rotating text — mobile size */}
+      <div
+        className="relative block lg:hidden"
+        style={{ width: mobileSize, height: mobileSize }}
+      >
         <svg
-          width={size}
-          height={size}
-          viewBox={`0 0 ${size} ${size}`}
+          width={mobileSize}
+          height={mobileSize}
+          viewBox={`0 0 ${mobileSize} ${mobileSize}`}
           className="absolute inset-0"
           style={{ animation: "spin-slow 20s linear infinite" }}
           aria-hidden="true"
         >
           <defs>
             <path
-              id={id}
-              d={`M ${cx},${cy - r} a ${r},${r} 0 1,1 -0.01,0`}
+              id={`${id}-m`}
+              d={`M ${mobileSize/2},${mobileSize/2 - mobileR} a ${mobileR},${mobileR} 0 1,1 -0.01,0`}
             />
           </defs>
-          <text
-            fontSize="9.5"
-            fontWeight="800"
-            letterSpacing="3"
-            className="fill-slate-400 dark:fill-slate-600"
-          >
-            <textPath href={`#${id}`}>{circleText.repeat(2)}</textPath>
+          <text fontSize="8" fontWeight="800" letterSpacing="2.5" className="fill-slate-400 dark:fill-slate-600">
+            <textPath href={`#${id}-m`}>{circleText.repeat(2)}</textPath>
           </text>
         </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+          <span className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-400">
+            {value}
+          </span>
+        </div>
+      </div>
 
-        {/* Center number */}
+      {/* Circle + rotating text — desktop size */}
+      <div
+        className="relative hidden lg:block"
+        style={{ width: desktopSize, height: desktopSize }}
+      >
+        <svg
+          width={desktopSize}
+          height={desktopSize}
+          viewBox={`0 0 ${desktopSize} ${desktopSize}`}
+          className="absolute inset-0"
+          style={{ animation: "spin-slow 20s linear infinite" }}
+          aria-hidden="true"
+        >
+          <defs>
+            <path
+              id={`${id}-d`}
+              d={`M ${desktopSize/2},${desktopSize/2 - desktopR} a ${desktopR},${desktopR} 0 1,1 -0.01,0`}
+            />
+          </defs>
+          <text fontSize="9.5" fontWeight="800" letterSpacing="3" className="fill-slate-400 dark:fill-slate-600">
+            <textPath href={`#${id}-d`}>{circleText.repeat(2)}</textPath>
+          </text>
+        </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <span className="text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-400">
             {value}
@@ -60,11 +86,11 @@ function CircularMetric({
       </div>
 
       {/* Label below circle */}
-      <div className="text-center max-w-[180px]">
-        <p className="text-slate-900 dark:text-white font-black text-sm uppercase tracking-tight leading-snug mb-1">
+      <div className="text-center max-w-[160px]">
+        <p className="text-slate-900 dark:text-white font-black text-xs sm:text-sm uppercase tracking-tight leading-snug mb-1">
           {label}
         </p>
-        <p className="text-slate-500 dark:text-slate-500 text-[12px] leading-relaxed font-medium">
+        <p className="text-slate-500 dark:text-slate-500 text-[11px] leading-relaxed font-medium">
           {sub}
         </p>
       </div>
@@ -131,7 +157,7 @@ export default function Metrics() {
         </div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-4 place-items-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-2 sm:gap-x-4 place-items-center">
           {metricStats.map((m, i) => (
             <CircularMetric
               key={i}
