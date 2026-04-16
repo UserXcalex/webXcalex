@@ -144,36 +144,46 @@ export default function ChatBot() {
 
       {/* === CHAT WINDOW === */}
       <div
-        className={`fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-24px)] transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-0 right-0 sm:bottom-24 sm:right-6 z-50 w-full sm:w-[380px] transition-all duration-300 origin-bottom-right ${
           isOpen
             ? "opacity-100 scale-100 pointer-events-auto"
             : "opacity-0 scale-90 pointer-events-none"
         }`}
       >
-        <div className="bg-white dark:bg-[#0d1117] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col"
-          style={{ height: "480px" }}
+        <div className="bg-white dark:bg-[#0d1117] sm:rounded-2xl shadow-2xl border-t sm:border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[100dvh] sm:h-[520px] max-h-[100dvh]"
         >
           {/* Header */}
-          <div className="flex items-center gap-3 p-4 border-b border-slate-100 dark:border-slate-800"
+          <div className="flex items-center gap-3 p-4 sm:p-4 border-b border-slate-100 dark:border-slate-800"
             style={{ background: "linear-gradient(135deg, #1d4ed8 0%, #3730a3 100%)" }}
           >
             {/* Avatar */}
-            <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-black text-sm">X</span>
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+              <span className="text-white font-black text-base">X</span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white font-black text-sm leading-none">XAIA</p>
               <p className="text-blue-200 text-xs mt-0.5">{t("subtitle")}</p>
             </div>
-            {/* Online dot */}
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-blue-200 text-xs font-medium">{t("online")}</span>
+            
+            <div className="flex items-center gap-3">
+              {/* Online dot */}
+              <div className="hidden sm:flex items-center gap-1.5">
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-blue-200 text-[10px] font-medium uppercase tracking-wider">{t("online")}</span>
+              </div>
+              
+              {/* Mobile Close Button */}
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="sm:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
             </div>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide bg-slate-50/50 dark:bg-transparent">
             {messages.map((msg) => (
               <div
                 key={msg.id}
