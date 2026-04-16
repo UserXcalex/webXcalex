@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { Inter } from "next/font/google";
 import "../globals.css";
 import ChatBot from "@/components/ChatBot";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,7 +13,7 @@ const inter = Inter({
 });
 
 export function generateStaticParams() {
-  return [{locale: 'en'}, {locale: 'es'}];
+  return [{ locale: 'en' }, { locale: 'es' }];
 }
 
 export const metadata: Metadata = {
@@ -26,10 +27,10 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params: {locale}
+  params: { locale }
 }: {
   children: React.ReactNode;
-  params: {locale: string};
+  params: { locale: string };
 }) {
   // Forzamos la carga de mensajes usando el locale de la URL
   const messages = await getMessages();
@@ -37,8 +38,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <body className={`${inter.className} antialiased bg-white dark:bg-[#020617] transition-colors duration-300`}>
-        <NextIntlClientProvider 
-          locale={locale} 
+        <NextIntlClientProvider
+          locale={locale}
           messages={messages}
           timeZone="America/Bogota" // Ajusta a tu zona si quieres
         >
@@ -46,6 +47,17 @@ export default async function LocaleLayout({
           {children}
           <ChatBot />
         </NextIntlClientProvider>
+        <Script
+          src="https://web-xcalex.vercel.app/xaia-widget.js"
+          strategy="lazyOnload"
+          data-client="xcalex"
+          data-webhook="https://superozonoglobal.app.n8n.cloud/webhook/xcalex-xaia-chat-v2"
+          data-title="Ayuda Xcalex"
+          data-subtitle="Asistente Virtual"
+          data-primary="#A4BBF6" /* El color de tu marca */
+          data-accent="#0F172A" /* Verde de WhatsApp */
+          data-welcome="¡Hola! Soy tu asistente de IA. ¿En qué te puedo ayudar hoy?"
+        />
       </body>
     </html>
   );
