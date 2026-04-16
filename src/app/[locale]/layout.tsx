@@ -32,7 +32,6 @@ export default async function LocaleLayout({
   params: {locale: string};
 }) {
   // Forzamos la carga de mensajes usando el locale de la URL
-  console.log('>>> [LAYOUT LOCAL] Renderizando para locale:', locale);
   const messages = await getMessages();
 
   return (

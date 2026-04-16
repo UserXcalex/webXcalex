@@ -12,7 +12,6 @@ export default function DoNotSell() {
   const handleSubmit = () => {
     if (!email) return;
     // Request logic
-    console.log("Do not sell request:", email);
     setEmail("");
   };
 

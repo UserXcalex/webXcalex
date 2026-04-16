@@ -55,7 +55,6 @@ export default function ChatBot() {
     setInput("");
     setLoading(true);
 
-    console.log("[XAIA] 📤 Enviando mensaje con historial...");
     
     // Obtenemos los últimos 6 mensajes para dar contexto pero no saturar
     const history = messages.slice(-5).map(m => ({
@@ -76,13 +75,7 @@ export default function ChatBot() {
         }),
       });
 
-      console.log("[XAIA] 📡 HTTP Status:", res.status, res.statusText);
-
       const data = await res.json();
-      console.log("[XAIA] 📥 Respuesta completa de n8n:", data);
-      console.log("[XAIA] 💬 Mensaje de XAIA:", data.message);
-      console.log("[XAIA] 🔀 Tipo:", data.type);
-      if (data.whatsapp) console.log("[XAIA] 📱 WhatsApp URL:", data.whatsapp);
 
       const botMsg: ChatMessage = {
         id: ++msgId.current,

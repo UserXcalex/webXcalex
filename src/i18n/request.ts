@@ -11,7 +11,6 @@ export default getRequestConfig(async ({locale}) => {
   
   const targetLocale = locale || headerLocale || routing.defaultLocale;
   
-  console.log('>>> [REQUEST.TS] Detectado:', targetLocale, '(Param:', locale, '| Header:', headerLocale, ')');
 
   if (!routing.locales.includes(targetLocale as any)) {
     return {
