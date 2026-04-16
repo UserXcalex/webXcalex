@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 // ✅ PRODUCCIÓN
 //const XAIA_WEBHOOK_URL = "https://superozonoglobal.app.n8n.cloud/webhook/xcalex-xaia-chat";
-const XAIA_WEBHOOK_URL = "https://superozonoglobal.app.n8n.cloud/webhook-test/xcalex-xaia-chat-v2"
+const XAIA_WEBHOOK_URL = "https://superozonoglobal.app.n8n.cloud/webhook/xcalex-xaia-chat-v2";
 
 type MessageRole = "user" | "xaia";
 
@@ -72,7 +72,8 @@ export default function ChatBot() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: text,
-          history: history // Enviamos el array completo
+          history: history, // Enviamos el array completo
+          client_id: "xcalex"
         }),
       });
 
