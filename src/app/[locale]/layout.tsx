@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from "next/font/google";
 import "../globals.css";
+import ChatBot from "@/components/ChatBot";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
         >
           <div id="theme-reveal-overlay" aria-hidden="true" />
           {children}
+          <ChatBot />
         </NextIntlClientProvider>
       </body>
     </html>

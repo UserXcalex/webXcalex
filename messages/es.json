@@ -297,5 +297,13 @@
       "sent": "¡Enviado!",
       "submit": "Reservar llamada"
     }
+  },
+  "Chat": {
+    "greeting": "¡Hola! Soy XAIA, tu asistente de Xcalex. ¿En qué puedo ayudarte hoy? 🚀",
+    "subtitle": "Asistente Virtual Xcalex",
+    "online": "En línea",
+    "placeholder": "Escribe tu pregunta...",
+    "whatsapp_btn": "Chatear por WhatsApp",
+    "error": "Error de conexión. Inténtalo de nuevo en un momento."
   }
 }

@@ -297,5 +297,13 @@
       "sent": "Sent!",
       "submit": "Book Call"
     }
+  },
+  "Chat": {
+    "greeting": "Hi! I'm XAIA, your Xcalex assistant. How can I help you today? 🚀",
+    "subtitle": "Xcalex Virtual Assistant",
+    "online": "Online",
+    "placeholder": "Type your question...",
+    "whatsapp_btn": "Chat on WhatsApp",
+    "error": "Connection error. Please try again in a moment."
   }
 }
