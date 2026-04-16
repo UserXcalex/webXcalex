@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Loader2, ExternalLink } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, ExternalLink, Bot } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 // ✅ PRODUCCIÓN
@@ -150,8 +150,8 @@ export default function ChatBot() {
             style={{ background: "linear-gradient(135deg, #1d4ed8 0%, #3730a3 100%)" }}
           >
             {/* Avatar */}
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-black text-base">X</span>
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 border border-white/30 backdrop-blur-sm">
+              <Bot className="w-6 h-6 text-white" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white font-black text-sm leading-none">XAIA</p>
@@ -183,8 +183,8 @@ export default function ChatBot() {
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {msg.role === "xaia" && (
-                  <div className="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
-                    <span className="text-blue-600 dark:text-blue-400 font-black text-xs">X</span>
+                  <div className="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 border border-blue-200 dark:border-blue-800">
+                    <Bot className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   </div>
                 )}
                 <div className={`max-w-[78%] flex flex-col gap-2`}>
@@ -220,8 +220,8 @@ export default function ChatBot() {
             {/* Typing indicator */}
             {loading && (
               <div className="flex justify-start">
-                <div className="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5">
-                  <span className="text-blue-600 dark:text-blue-400 font-black text-xs">X</span>
+                <div className="w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0 mr-2 mt-0.5 border border-blue-200 dark:border-blue-800">
+                  <Bot className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div className="px-4 py-3 bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-sm flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
