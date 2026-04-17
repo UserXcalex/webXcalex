@@ -9,8 +9,8 @@
     primaryColor: currentScript?.dataset.primary || "#2563eb",
     accentColor: currentScript?.dataset.accent || "#22c55e",
     welcomeMessage: currentScript?.dataset.welcome || "¡Hola! Soy la asesora de IA. ¿En qué puedo ayudarte hoy?",
-    launcherIcon: currentScript?.dataset.icon || `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`,
-    botIcon: currentScript?.dataset.boticon || `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
+    launcherIcon: currentScript?.dataset.launchericon || '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>',
+    botIcon: currentScript?.dataset.boticon || '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>',
     storageKey: currentScript?.dataset.storage || "xaia_chat_history",
   };
 
@@ -29,28 +29,147 @@
     #xaia-launcher {
       position: fixed;
       bottom: 24px;
-      right: 24px;
+      right: 80px;
       width: 60px;
       height: 60px;
-      border-radius: 50%;
+      border-radius: 30px;
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* Alineado al inicio para la expansión */
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 2147483647;
       background: ${config.primaryColor};
       color: #ffffff;
+      padding: 0;
+      /* overflow: hidden removido para permitir que la onda se vea */
     }
     #xaia-launcher:hover {
-      transform: scale(1.1);
+      width: 160px;
+    }
+    #xaia-launcher-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden; /* El recorte ahora ocurre aquí */
+      border-radius: inherit;
+      position: relative;
+      z-index: 2;
+    }
+    #xaia-launcher.xaia-open-state {
+      width: 60px !important;
+    }
+    #xaia-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #xaia-launcher-text {
+      font-weight: 600;
+      font-size: 15px;
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #xaia-launcher:hover #xaia-launcher-text {
+      opacity: 1;
+      max-width: 100px;
+      margin-left: 0px;
+      margin-right: 15px;
+    }
+    #xaia-launcher:active {
+      transform: scale(0.95);
+    }
+    #xaia-launcher.xaia-pulse {
+      animation: xaia-heartbeat 2s infinite;
+    }
+    #xaia-launcher.xaia-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, ${config.primaryColor}, #818cf8, #c084fc);
+      z-index: 1;
+      animation: xaia-wave 2s infinite, xaia-gradient-move 3s infinite linear;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #xaia-launcher:hover::after {
+      opacity: 0 !important;
+      animation: none;
+    }
+    @keyframes xaia-wave {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    @keyframes xaia-gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #xaia-launcher-tooltip {
+      position: fixed;
+      bottom: 100px;
+      right: 80px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #0f172a;
+      padding: 12px 20px;
+      border-radius: 18px 18px 4px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+      z-index: 2147483646;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      max-width: 240px;
+      animation: xaia-float 3s infinite ease-in-out;
+    }
+    @keyframes xaia-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    #xaia-launcher-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #xaia-launcher-tooltip.show {
+      animation: xaia-tooltip-entrance 0.5s ease-out, xaia-float 3s 0.5s infinite ease-in-out;
+    }
+    @keyframes xaia-tooltip-entrance {
+      from { opacity: 0; transform: scale(0.8) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    #xaia-launcher-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 20px;
+      width: 16px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
     #xaia-widget {
       position: fixed;
       bottom: 100px;
-      right: 24px;
+      right: 80px;
       width: 380px;
       height: 600px;
       max-height: calc(100svh - 120px);
@@ -259,26 +378,32 @@
       box-shadow: 0 6px 12px rgba(34, 197, 94, 0.3);
       filter: brightness(1.05);
     }
+    .bot #xaia-typing-indicator-bubble {
+      padding: 8px 12px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .xaia-typing-container {
       display: flex;
       gap: 5px;
-      padding: 4px 2px;
+      padding: 0;
       align-items: center;
-      height: 12px;
+      height: 20px;
     }
     .xaia-typing-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       background: #cbd5e1;
       border-radius: 50%;
-      animation: xaia-pulse 1.4s infinite ease-in-out both;
+      animation: xaia-pulse-dot 1s infinite ease-in-out both;
     }
     .xaia-typing-dot:nth-child(1) { animation-delay: 0s; }
     .xaia-typing-dot:nth-child(2) { animation-delay: 0.2s; }
     .xaia-typing-dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes xaia-pulse {
-      0%, 100% { transform: scale(0.8); opacity: 0.4; }
-      50% { transform: scale(1.2); opacity: 1; background: ${config.primaryColor}; }
+    @keyframes xaia-pulse-dot {
+      0%, 100% { transform: scale(0.8); opacity: 0.4; background: #cbd5e1; }
+      50% { transform: scale(1.3); opacity: 1; background: ${config.primaryColor}; }
     }
     
     @media (max-width: 480px) {
@@ -308,9 +433,16 @@
 
   // HTML Interno
   root.innerHTML = `
-    <button id="xaia-launcher" aria-label="Abrir chat">
-      ${config.launcherIcon}
+    <button id="xaia-launcher" class="xaia-pulse" aria-label="Abrir chat">
+      <div id="xaia-launcher-content">
+        <div id="xaia-icon-wrapper">
+          <div id="xaia-icon-open">${config.launcherIcon}</div>
+          <svg id="xaia-icon-close" style="display:none" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </div>
+        <span id="xaia-launcher-text">Asistente</span>
+      </div>
     </button>
+    <div id="xaia-launcher-tooltip">${config.welcomeMessage}</div>
     <div id="xaia-widget">
       <div id="xaia-header">
         <div class="xaia-avatar">${config.botIcon}</div>
@@ -341,25 +473,53 @@
   const launcher = document.getElementById("xaia-launcher");
   const widget = document.getElementById("xaia-widget");
   const closeBtn = document.getElementById("xaia-close");
+  const iconOpen = document.getElementById("xaia-icon-open");
+  const iconClose = document.getElementById("xaia-icon-close");
   const messagesBox = document.getElementById("xaia-messages");
   const form = document.getElementById("xaia-form");
   const input = document.getElementById("xaia-input");
   const sendBtn = document.getElementById("xaia-send");
-  
+  const tooltip = document.getElementById("xaia-launcher-tooltip");
+
   let history = loadHistory();
   let isLoading = false;
 
+  // Mostrar el tooltip después de 3 segundos
+  setTimeout(() => {
+    if (!widget.classList.contains("xaia-open")) {
+      tooltip.classList.add("show");
+    }
+  }, 3000);
+
   // Listeners
   const toggleChat = () => {
-    widget.classList.toggle("xaia-open");
-    // Al abrir por primera vez, si el chat está vacío se envía el saludo inicial
-    if (widget.classList.contains("xaia-open") && messagesBox.children.length === 0) {
+    const isOpen = widget.classList.toggle("xaia-open");
+    iconOpen.style.display = isOpen ? "none" : "block";
+    iconClose.style.display = isOpen ? "block" : "none";
+
+    if (isOpen) {
+      tooltip.classList.remove("show");
+      launcher.classList.remove("xaia-pulse");
+      launcher.classList.add("xaia-open-state");
+      if (window.innerWidth > 480) input.focus();
+    } else {
+      launcher.classList.remove("xaia-open-state");
+      launcher.classList.add("xaia-pulse");
+      // Opcional: Volver a mostrar el tooltip tras un pequeño delay al cerrar
+      setTimeout(() => {
+        if (!widget.classList.contains("xaia-open")) {
+          tooltip.classList.add("show");
+        }
+      }, 2000);
+    }
+
+    if (isOpen && messagesBox.children.length === 0) {
       renderInitial();
     }
   };
 
   launcher.addEventListener("click", toggleChat);
-  closeBtn.addEventListener("click", () => widget.classList.remove("xaia-open"));
+  closeBtn.addEventListener("click", toggleChat);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -367,15 +527,15 @@
     if (!text || isLoading) return;
 
     addMessage("user", text);
-    
+
     // Enviamos un subset del historial para no saturar tokens (los últimos 5 + el nuevo)
     const contextHistory = history.slice(-5);
     contextHistory.push({ role: "user", content: text });
-    
+
     // Guardamos en local storage el full history
     history.push({ role: "user", content: text });
     saveHistory();
-    
+
     input.value = "";
     showTyping();
     isLoading = true;
@@ -386,7 +546,7 @@
       const response = await fetch(config.webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           message: text,
           history: contextHistory,
           client_id: config.clientId
@@ -394,7 +554,7 @@
       });
       const data = await response.json();
       removeTyping();
-      
+
       if (data.message) {
         addMessage("assistant", data.message, data.type === "transfer" ? data.whatsapp : null);
         history.push({ role: "assistant", content: data.message });
@@ -462,7 +622,7 @@
     wrapper.id = "xaia-typing-indicator";
     wrapper.innerHTML = `
       <div class="xaia-msg-avatar">${config.botIcon}</div>
-      <div class="xaia-msg">
+      <div id="xaia-typing-indicator-bubble" class="xaia-msg">
         <div class="xaia-typing-container">
           <div class="xaia-typing-dot"></div>
           <div class="xaia-typing-dot"></div>
