@@ -28,7 +28,7 @@
     }
     #xaia-launcher {
       position: fixed;
-      bottom: 40px;
+      bottom: 35px;
       right: 120px;
       width: 60px;
       height: 60px;
