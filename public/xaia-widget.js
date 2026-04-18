@@ -29,7 +29,7 @@
     #xaia-launcher {
       position: fixed;
       bottom: 24px;
-      right: 120px;
+      right: 20px;
       width: 60px;
       height: 60px;
       border-radius: 30px;
