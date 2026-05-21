@@ -256,6 +256,70 @@
     "opt_out_desc": "Si desea ejercer su derecho a la exclusión voluntaria, complete el formulario a continuación o envíenos un correo electrónico.",
     "contact": "Contacto"
   },
+  "Pricing": {
+    "badge": "Planes & Servicios",
+    "title_start": "Inversión en",
+    "title_accent": "Resultados Reales",
+    "description": "Planes diseñados para empresas ambiciosas que entienden que la tecnología es un activo estratégico, no un gasto.",
+    "toggle_monthly": "Mensual",
+    "toggle_annual": "Anual",
+    "save_badge": "Ahorra 20%",
+    "most_popular": "Más Popular",
+    "cta_start": "Empezar Ahora",
+    "cta_enterprise": "Hablar con el Equipo",
+    "custom_price": "A Medida",
+    "custom_period": "personalizado",
+    "currency": "USD",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "price_monthly": "1,500",
+        "price_annual": "1,200",
+        "period": "/ proyecto",
+        "tagline": "Para lanzar tu presencia digital con impacto real desde el primer día.",
+        "features": [
+          "Landing page profesional",
+          "Diseño UI/UX personalizado",
+          "Responsive & SEO-optimizado",
+          "Integración de formularios y CTA",
+          "Deploy + configuración de hosting",
+          "Soporte técnico 30 días"
+        ]
+      },
+      "growth": {
+        "name": "Growth",
+        "price_monthly": "4,500",
+        "price_annual": "3,600",
+        "period": "/ mes",
+        "tagline": "Para marcas en expansión que necesitan velocidad, sistemas y resultados medibles.",
+        "features": [
+          "Todo lo incluido en Starter",
+          "Plataforma web completa a medida",
+          "Integración CRM & automatizaciones",
+          "Dashboard de analytics en tiempo real",
+          "IA básica integrada al flujo",
+          "Hasta 3 revisiones por sprint",
+          "Soporte técnico 60 días",
+          "Optimización de rendimiento continua"
+        ]
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "tagline": "Para empresas que exigen el máximo nivel de ingeniería y resultados estratégicos.",
+        "features": [
+          "Todo lo incluido en Growth",
+          "IA avanzada y personalizada",
+          "Automatización de procesos completa",
+          "Equipo de ingeniería dedicado",
+          "Estrategia digital integral",
+          "Sistema de bots inteligentes",
+          "SLA 99.9% garantizado",
+          "Soporte prioritario 24/7",
+          "Auditorías de seguridad y código"
+        ]
+      }
+    }
+  },
   "Authority": {
     "badge": "Nuestra Posición",
     "quote_p1": "La mayoría de las empresas no necesitan otro proveedor.",
