@@ -256,6 +256,70 @@
     "opt_out_desc": "If you wish to exercise your right to opt-out, please fill out the form below or send us an email.",
     "contact": "Contact"
   },
+  "Pricing": {
+    "badge": "Plans & Services",
+    "title_start": "Investing in",
+    "title_accent": "Real Results",
+    "description": "Plans designed for ambitious companies that understand technology is a strategic asset, not an expense.",
+    "toggle_monthly": "Monthly",
+    "toggle_annual": "Annual",
+    "save_badge": "Save 20%",
+    "most_popular": "Most Popular",
+    "cta_start": "Start Now",
+    "cta_enterprise": "Talk to the Team",
+    "custom_price": "Custom",
+    "custom_period": "tailored",
+    "currency": "USD",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "price_monthly": "1,500",
+        "price_annual": "1,200",
+        "period": "/ project",
+        "tagline": "Launch your digital presence with real impact from day one.",
+        "features": [
+          "Professional landing page",
+          "Custom UI/UX design",
+          "Responsive & SEO-optimized",
+          "Forms and CTA integration",
+          "Deploy + hosting setup",
+          "30-day technical support"
+        ]
+      },
+      "growth": {
+        "name": "Growth",
+        "price_monthly": "4,500",
+        "price_annual": "3,600",
+        "period": "/ month",
+        "tagline": "For expanding brands that need speed, systems and measurable results.",
+        "features": [
+          "Everything in Starter",
+          "Full custom web platform",
+          "CRM & automation integrations",
+          "Real-time analytics dashboard",
+          "Basic AI integrated into flows",
+          "Up to 3 revisions per sprint",
+          "60-day technical support",
+          "Ongoing performance optimization"
+        ]
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "tagline": "For companies demanding the highest level of engineering and strategic results.",
+        "features": [
+          "Everything in Growth",
+          "Advanced custom AI",
+          "Full process automation",
+          "Dedicated engineering team",
+          "Comprehensive digital strategy",
+          "Intelligent bot systems",
+          "99.9% SLA guaranteed",
+          "Priority 24/7 support",
+          "Security and code audits"
+        ]
+      }
+    }
+  },
   "Authority": {
     "badge": "Our Position",
     "quote_p1": "Most companies don't need another vendor.",

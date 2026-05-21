@@ -1,79 +1,101 @@
 "use client";
 
 import { useInView } from "@/hooks/useInView";
-import { Lightbulb, Zap, Layers, PenTool, BarChart2, Workflow } from "lucide-react";
+import { Lightbulb, Zap, Layers, PenTool, BarChart2, Workflow, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+const differentiators = [
+  { icon: Lightbulb, key: "strategy",   color: "rgba(245,158,11,1)",  bg: "rgba(245,158,11,0.1)" },
+  { icon: Zap,        key: "speed",      color: "rgba(59,130,246,1)",   bg: "rgba(59,130,246,0.1)" },
+  { icon: Layers,     key: "scaling",    color: "rgba(34,211,238,1)",   bg: "rgba(34,211,238,0.1)" },
+  { icon: PenTool,    key: "design",     color: "rgba(249,115,22,1)",   bg: "rgba(249,115,22,0.1)" },
+  { icon: BarChart2,  key: "business",   color: "rgba(16,185,129,1)",   bg: "rgba(16,185,129,0.1)" },
+  { icon: Workflow,   key: "automation", color: "rgba(139,92,246,1)",   bg: "rgba(139,92,246,0.1)" },
+];
 
 export default function WhyXcalex() {
   const t = useTranslations("WhyXcalex");
-  const { ref, inView } = useInView({ threshold: 0.1 });
-
-  const differentiators = [
-    { icon: Lightbulb, key: "strategy" },
-    { icon: Zap, key: "speed" },
-    { icon: Layers, key: "scaling" },
-    { icon: PenTool, key: "design" },
-    { icon: BarChart2, key: "business" },
-    { icon: Workflow, key: "automation" },
-  ];
+  const { ref, inView } = useInView({ threshold: 0.08 });
 
   return (
-    <section 
-      id="solutions" 
+    <section
+      id="solutions"
       ref={ref}
-      className={`relative py-24 lg:py-32 bg-white dark:bg-[#020617] transition-colors duration-500 overflow-hidden reveal ${inView ? 'in-view' : ''}`}
+      className={`relative py-28 lg:py-36 bg-white dark:bg-[#07070f] transition-colors duration-500 overflow-hidden reveal ${inView ? "in-view" : ""}`}
     >
-      {/* Background accent */}
+      {/* Subtle right glow */}
       <div
         aria-hidden="true"
-        className="absolute right-0 top-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
+        className="absolute right-0 top-1/3 w-[600px] h-[600px] rounded-full pointer-events-none opacity-0 dark:opacity-100"
         style={{
-          background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%)",
+          filter: "blur(64px)",
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Left: copy */}
-          <div className="lg:sticky lg:top-28">
-            <p className="text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.3em] uppercase mb-4">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-[420px_1fr] xl:grid-cols-[480px_1fr] gap-16 lg:gap-24 items-start">
+
+          {/* ── Left: sticky copy ── */}
+          <div className="lg:sticky lg:top-32">
+            <p className="text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.35em] uppercase mb-5">
               {t("badge")}
             </p>
-            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-8">
-              {t("title_start")} <span className="text-blue-600 dark:text-blue-400">{t("title_accent")}</span> {t("title_end")}
+            <h2 className="text-4xl lg:text-[48px] font-black text-slate-900 dark:text-white tracking-tight leading-[1.06] mb-8">
+              {t("title_start")}{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 bg-clip-text text-transparent">
+                {t("title_accent")}
+              </span>{" "}
+              {t("title_end")}
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-10 max-w-lg">
+            <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-5 text-[15px]">
               {t("desc1")}
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed mb-10 font-medium">
+            <p className="text-slate-400 dark:text-slate-500 text-[14px] leading-relaxed mb-10 font-medium">
               {t("desc2")}
             </p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-bold text-sm transition-colors duration-200 group underline underline-offset-4 decoration-2 decoration-blue-600/20"
+              className="group inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-black text-sm transition-colors duration-200"
             >
               {t("cta")}
-              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
             </a>
+
+            {/* Visual accent */}
+            <div className="mt-16 hidden lg:block">
+              <div
+                className="rounded-2xl p-6 border border-slate-100 dark:border-white/[0.06]"
+                style={{ background: "rgba(59,130,246,0.03)" }}
+              >
+                <div className="text-[11px] font-black tracking-[0.25em] uppercase text-blue-600 dark:text-blue-400 mb-3">Diferencia Xcalex</div>
+                <div className="text-[13px] text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                  No hacemos proyectos. Construimos sistemas que escalan negocios.
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right: differentiator list */}
-          <div className="flex flex-col gap-6">
+          {/* ── Right: differentiator cards ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {differentiators.map((d) => {
               const Icon = d.icon;
               return (
                 <div
                   key={d.key}
-                  className="group flex gap-6 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-600/10 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/50 transition-all duration-300 cursor-pointer"
+                  className="group flex flex-col gap-4 p-6 rounded-2xl border border-slate-100 dark:border-white/[0.06] bg-white dark:bg-white/[0.025] hover:border-blue-500/20 dark:hover:border-blue-500/25 hover:shadow-lg hover:shadow-slate-100/80 dark:hover:shadow-black/30 transition-all duration-300 cursor-default"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-600/10 dark:bg-blue-500/10 border border-blue-600/5 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-300">
-                    <Icon size={22} className="text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    style={{ background: d.bg, color: d.color }}
+                  >
+                    <Icon size={19} />
                   </div>
                   <div>
-                    <h4 className="text-slate-900 dark:text-white font-black text-lg mb-2">
+                    <h4 className="text-slate-900 dark:text-white font-black text-[15px] mb-2 leading-snug">
                       {t(`items.${d.key}.title`)}
                     </h4>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm font-medium leading-relaxed">
+                    <p className="text-slate-500 dark:text-slate-400 text-[13px] font-medium leading-relaxed">
                       {t(`items.${d.key}.desc`)}
                     </p>
                   </div>

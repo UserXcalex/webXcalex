@@ -37,7 +37,23 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={inter.variable} suppressHydrationWarning>
-      <body className={`${inter.className} antialiased bg-white dark:bg-[#020617] transition-colors duration-300`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('xcalex-theme');
+                  if (saved === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.className} antialiased bg-white dark:bg-[#02020a] transition-colors duration-300`}>
         <NextIntlClientProvider
           locale={locale}
           messages={messages}
@@ -56,7 +72,6 @@ export default async function LocaleLayout({
           data-subtitle="Asistente Virtual"
           data-primary="#A4BBF6" /* El color de tu marca */
           data-accent="#0F172A" /* Verde de WhatsApp */
-          data-welcome="¡Hola! Soy tu asistente de IA. ¿En qué te puedo ayudar hoy?"
         />
       </body>
     </html>

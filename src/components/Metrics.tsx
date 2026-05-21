@@ -3,170 +3,90 @@
 import { useInView } from "@/hooks/useInView";
 import { useTranslations } from "next-intl";
 
-function CircularMetric({
-  value,
-  label,
-  sub,
-  circleText,
-  index,
-}: {
-  value: string;
-  label: string;
-  sub: string;
-  circleText: string;
-  index: number;
-}) {
-  const id = `cp-${index}`;
-  // Responsive: 160px on mobile, 240px on desktop
-  const mobileSize = 160;
-  const desktopSize = 240;
-  const mobileR = 68;
-  const desktopR = 104;
-
-  return (
-    <div className="flex flex-col items-center gap-3 group cursor-pointer w-full">
-      {/* Circle + rotating text — mobile size */}
-      <div
-        className="relative block lg:hidden"
-        style={{ width: mobileSize, height: mobileSize }}
-      >
-        <svg
-          width={mobileSize}
-          height={mobileSize}
-          viewBox={`0 0 ${mobileSize} ${mobileSize}`}
-          className="absolute inset-0"
-          style={{ animation: "spin-slow 20s linear infinite" }}
-          aria-hidden="true"
-        >
-          <defs>
-            <path
-              id={`${id}-m`}
-              d={`M ${mobileSize/2},${mobileSize/2 - mobileR} a ${mobileR},${mobileR} 0 1,1 -0.01,0`}
-            />
-          </defs>
-          <text fontSize="8" fontWeight="800" letterSpacing="2.5" className="fill-slate-400 dark:fill-slate-600">
-            <textPath href={`#${id}-m`}>{circleText.repeat(2)}</textPath>
-          </text>
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-400">
-            {value}
-          </span>
-        </div>
-      </div>
-
-      {/* Circle + rotating text — desktop size */}
-      <div
-        className="relative hidden lg:block"
-        style={{ width: desktopSize, height: desktopSize }}
-      >
-        <svg
-          width={desktopSize}
-          height={desktopSize}
-          viewBox={`0 0 ${desktopSize} ${desktopSize}`}
-          className="absolute inset-0"
-          style={{ animation: "spin-slow 20s linear infinite" }}
-          aria-hidden="true"
-        >
-          <defs>
-            <path
-              id={`${id}-d`}
-              d={`M ${desktopSize/2},${desktopSize/2 - desktopR} a ${desktopR},${desktopR} 0 1,1 -0.01,0`}
-            />
-          </defs>
-          <text fontSize="9.5" fontWeight="800" letterSpacing="3" className="fill-slate-400 dark:fill-slate-600">
-            <textPath href={`#${id}-d`}>{circleText.repeat(2)}</textPath>
-          </text>
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-400">
-            {value}
-          </span>
-        </div>
-      </div>
-
-      {/* Label below circle */}
-      <div className="text-center max-w-[160px]">
-        <p className="text-slate-900 dark:text-white font-black text-xs sm:text-sm uppercase tracking-tight leading-snug mb-1">
-          {label}
-        </p>
-        <p className="text-slate-500 dark:text-slate-500 text-[11px] leading-relaxed font-medium">
-          {sub}
-        </p>
-      </div>
-    </div>
-  );
-}
+const metricStats = [
+  { value: "3×",    key: "launch",    gradient: "from-blue-500 to-blue-400",    glow: "rgba(59,130,246,0.18)",  border: "rgba(59,130,246,0.2)"  },
+  { value: "60%",   key: "friction",  gradient: "from-violet-500 to-violet-400", glow: "rgba(139,92,246,0.18)", border: "rgba(139,92,246,0.2)" },
+  { value: "99.9%", key: "sla",       gradient: "from-emerald-500 to-cyan-400",  glow: "rgba(16,185,129,0.18)", border: "rgba(16,185,129,0.2)" },
+  { value: "40+",   key: "delivered", gradient: "from-orange-500 to-amber-400",  glow: "rgba(249,115,22,0.18)", border: "rgba(249,115,22,0.2)" },
+];
 
 export default function Metrics() {
   const t = useTranslations("Metrics");
   const { ref, inView } = useInView({ threshold: 0.1 });
 
-  const metricStats = [
-    {
-      value: "3×",
-      key: "launch",
-    },
-    {
-      value: "60%",
-      key: "friction",
-    },
-    {
-      value: "99.9%",
-      key: "sla",
-    },
-    {
-      value: "40+",
-      key: "delivered",
-    },
-  ];
-
   return (
     <section
       id="outcomes"
       ref={ref}
-      className={`relative py-28 lg:py-36 bg-slate-50 dark:bg-[#010409] border-y border-slate-100 dark:border-slate-800 transition-colors duration-500 overflow-hidden reveal ${inView ? "in-view" : ""}`}
+      className={`relative py-28 lg:py-36 bg-slate-50 dark:bg-[#02020a] border-y border-slate-100 dark:border-white/[0.05] transition-colors duration-500 overflow-hidden reveal ${inView ? "in-view" : ""}`}
     >
-      <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-
-      {/* Subtle glow */}
+      {/* Central glow */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-0 dark:opacity-100"
         style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(37,99,235,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(59,130,246,0.05) 0%, transparent 65%)",
         }}
       />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         {/* Header */}
         <div className="text-center mb-20">
-          <p className="text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.3em] uppercase mb-4">
+          <p className="text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.35em] uppercase mb-5">
             {t("badge")}
           </p>
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1]">
+          <h2 className="text-4xl lg:text-[52px] font-black text-slate-900 dark:text-white tracking-tight leading-[1.06]">
             {t("title")}
-            <span className="text-blue-600 dark:text-blue-400">.</span>
+            <span className="text-blue-500">.</span>
           </h2>
         </div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-2 sm:gap-x-4 place-items-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {metricStats.map((m, i) => (
-            <CircularMetric
+            <div
               key={i}
-              index={i}
-              value={m.value}
-              label={t(`items.${m.key}.label`)}
-              sub={t(`items.${m.key}.sub`)}
-              circleText={t(`items.${m.key}.circle`)}
-            />
+              className="group relative flex flex-col items-center text-center rounded-2xl p-8 lg:p-10 bg-white dark:bg-white/[0.025] border transition-all duration-400 cursor-default"
+              style={{
+                borderColor: "rgba(15,23,42,0.07)",
+                transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "translateY(-6px)";
+                el.style.borderColor = m.border;
+                el.style.boxShadow = `0 0 32px ${m.glow}, 0 16px 48px rgba(15,23,42,0.07)`;
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "translateY(0)";
+                el.style.borderColor = "rgba(15,23,42,0.07)";
+                el.style.boxShadow = "0 1px 4px rgba(15,23,42,0.04)";
+              }}
+            >
+              {/* Glow dot */}
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full opacity-0 dark:opacity-60 group-hover:opacity-100 transition-opacity"
+                style={{ background: m.glow.replace("0.18", "1") }}
+              />
+
+              {/* Value */}
+              <span
+                className={`text-5xl lg:text-[64px] font-black tracking-tighter leading-none mb-5 bg-gradient-to-br ${m.gradient} bg-clip-text text-transparent`}
+              >
+                {m.value}
+              </span>
+
+              {/* Label */}
+              <p className="text-slate-900 dark:text-white font-black text-[13px] uppercase tracking-wide leading-snug mb-2">
+                {t(`items.${m.key}.label`)}
+              </p>
+
+              {/* Sub */}
+              <p className="text-slate-400 dark:text-slate-500 text-[12px] leading-relaxed font-medium">
+                {t(`items.${m.key}.sub`)}
+              </p>
+            </div>
           ))}
         </div>
       </div>

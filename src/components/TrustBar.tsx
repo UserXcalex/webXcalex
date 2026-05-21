@@ -1,29 +1,38 @@
 "use client";
 
 const clients = [
-  "Meridian Group",
-  "Arcova Capital",
-  "Vexor Systems",
-  "Lumis Ventures",
-  "Stratum AI",
-  "Nordex Corp",
-  "Opallion",
-  "Veract Labs",
+  "Super Ozono",
+  "Biozono",
 ];
 
 export default function TrustBar() {
   return (
-    <section className="bg-white dark:bg-[#020617] border-y border-slate-100 dark:border-slate-800 transition-colors duration-500 overflow-hidden py-10 lg:py-14">
-      <div className="relative flex items-center gap-12 sm:gap-24 overflow-hidden whitespace-nowrap">
-        {/* Gradients to fade edges */}
-        <div className="absolute left-0 inset-y-0 w-24 bg-gradient-to-r from-white dark:from-[#020617] to-transparent z-10" />
-        <div className="absolute right-0 inset-y-0 w-24 bg-gradient-to-l from-white dark:from-[#020617] to-transparent z-10" />
+    <section className="relative bg-white dark:bg-[#02020a] border-y border-slate-100 dark:border-white/[0.05] transition-colors duration-500 overflow-hidden py-8 lg:py-11">
 
-        <div className="animate-marquee flex items-center gap-12 sm:gap-24">
+      {/* Subtle top glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none opacity-0 dark:opacity-100"
+        style={{
+          background: "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Label */}
+      <p className="text-center text-[9px] font-black tracking-[0.35em] uppercase text-slate-400 dark:text-slate-600 mb-6 px-4">
+        Empresas que confían en Xcalex
+      </p>
+
+      {/* Marquee */}
+      <div className="relative flex items-center overflow-hidden whitespace-nowrap">
+        <div className="absolute left-0 inset-y-0 w-28 bg-gradient-to-r from-white dark:from-[#02020a] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 inset-y-0 w-28 bg-gradient-to-l from-white dark:from-[#02020a] to-transparent z-10 pointer-events-none" />
+
+        <div className="animate-marquee flex items-center gap-10 sm:gap-16 lg:gap-20">
           {[...clients, ...clients].map((name, i) => (
             <span
               key={i}
-              className="text-slate-900 dark:text-slate-300 hover:text-blue-600 transition-colors duration-300 text-sm font-black tracking-widest uppercase select-none cursor-pointer"
+              className="text-slate-300 dark:text-slate-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-400 text-[11px] sm:text-[13px] font-black tracking-[0.3em] uppercase select-none cursor-default"
             >
               {name}
             </span>

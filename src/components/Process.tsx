@@ -1,113 +1,138 @@
 "use client";
 
 import { useInView } from "@/hooks/useInView";
-import { PhoneCall, Users, Rocket } from "lucide-react";
+import { PhoneCall, Users, Rocket, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import BookingModal from "./BookingModal";
 import { useTranslations } from "next-intl";
 
 export default function Process() {
   const t = useTranslations("Process");
-  const { ref, inView } = useInView({ threshold: 0.1 });
+  const { ref, inView } = useInView({ threshold: 0.08 });
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const steps = [
-    { key: "step1", icon: PhoneCall },
-    { key: "step2", icon: Users },
-    { key: "step3", icon: Rocket },
+    { key: "step1", icon: PhoneCall, color: "rgb(59,130,246)",  bg: "rgba(59,130,246,0.1)"  },
+    { key: "step2", icon: Users,     color: "rgb(139,92,246)",  bg: "rgba(139,92,246,0.1)"  },
+    { key: "step3", icon: Rocket,    color: "rgb(16,185,129)",  bg: "rgba(16,185,129,0.1)"  },
   ];
 
   return (
     <>
-      <section 
-        id="process" 
+      <section
+        id="process"
         ref={ref}
-        className={`relative bg-slate-50 dark:bg-[#010409] py-24 lg:py-32 transition-colors duration-500 reveal ${inView ? 'in-view' : ''} border-y border-slate-100 dark:border-slate-800 overflow-hidden`}
+        className={`relative py-28 lg:py-36 bg-white dark:bg-[#07070f] border-y border-slate-100 dark:border-white/[0.05] transition-colors duration-500 overflow-hidden reveal ${inView ? "in-view" : ""}`}
       >
-      {/* Decorative background curve */}
-      <div 
-        className="absolute bottom-0 right-0 w-full h-[80%] bg-white dark:bg-[#020617] rounded-tl-[100px] lg:rounded-tl-[300px] pointer-events-none transition-colors duration-500"
-      />
+        {/* Subtle glow */}
+        <div
+          aria-hidden="true"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-0 dark:opacity-100"
+          style={{
+            background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 65%)",
+            filter: "blur(64px)",
+          }}
+        />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-        
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-          
-          {/* Left Column */}
-          <div className="flex-1 lg:max-w-lg lg:sticky lg:top-32 self-start flex flex-col gap-12">
-            <div>
-              <h2 className="text-4xl lg:text-[56px] font-bold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-2">
-                {t("title").split(',').map((part, index, array) => (
-                  <span key={index} className="block">
-                    {part.trim()}{index === array.length - 1 ? <span className="text-blue-600 dark:text-blue-400">.</span> : ","}
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+
+            {/* ── Left: sticky header + image ── */}
+            <div className="lg:sticky lg:top-28">
+              <p className="text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.35em] uppercase mb-5">
+                Nuestro Proceso
+              </p>
+              <h2 className="text-4xl lg:text-[52px] font-black text-slate-900 dark:text-white tracking-tight leading-[1.05] mb-8">
+                {t("title").split(",").map((part, i, arr) => (
+                  <span key={i} className="block">
+                    {part.trim()}
+                    {i < arr.length - 1 ? "," : <span className="text-blue-500">.</span>}
                   </span>
                 ))}
               </h2>
+
+              {/* Image with clip path */}
+              <div className="relative w-full h-[340px] rounded-2xl overflow-hidden hidden sm:block shadow-2xl shadow-slate-200/60 dark:shadow-black/60">
+                <img
+                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop"
+                  alt="Equipo Xcalex"
+                  className="w-full h-full object-cover"
+                  style={{ clipPath: "polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%)" }}
+                />
+                {/* Overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(59,130,246,0.2) 0%, transparent 60%)",
+                  }}
+                />
+              </div>
             </div>
 
-            {/* Masked Image (X Shape) */}
-            <div className="relative w-full h-[400px] rounded-2xl overflow-hidden mt-8 hidden sm:block shadow-2xl shadow-slate-200/50 dark:shadow-black/50">
-              <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop"
-                alt="Equipo Xcalex trabajando"
-                className="w-full h-full object-cover"
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%)' 
-                }}
-              />
-            </div>
-          </div>
+            {/* ── Right: Steps ── */}
+            <div className="flex flex-col gap-0 pt-2">
+              {steps.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <div key={i} className="group relative flex gap-6 pb-10 last:pb-0">
+                    {/* Connector line */}
+                    {i < steps.length - 1 && (
+                      <div
+                        className="absolute left-6 top-14 bottom-0 w-px"
+                        style={{
+                          background: "linear-gradient(to bottom, rgba(59,130,246,0.2), rgba(59,130,246,0.04))",
+                        }}
+                      />
+                    )}
 
-          {/* Right Column - Vertical Timeline */}
-          <div className="flex-1 pt-8 lg:pt-0">
-            <div className="relative border-l-2 border-dashed border-slate-300 dark:border-slate-700 ml-6 pb-8">
-              
-              <div className="flex flex-col gap-16 pb-12">
-                {steps.map((step, i) => {
-                  const Icon = step.icon;
-                  return (
-                    <div key={i} className="relative pl-12 sm:pl-16 group">
-                      {/* Icon Bubble */}
-                      <div className="absolute -left-[25px] top-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white border-4 border-slate-50 dark:border-[#020617] group-hover:scale-110 transition-transform shadow-lg shadow-blue-600/30">
+                    {/* Icon bubble */}
+                    <div className="flex-shrink-0 relative z-10">
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                        style={{
+                          background: step.bg,
+                          color: step.color,
+                          boxShadow: `0 0 0 0 ${step.bg}`,
+                        }}
+                      >
                         <Icon size={20} />
                       </div>
-
-                      {/* Content */}
-                      <div>
-                        <p className="text-[10px] font-black tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-2">
-                          {t(`steps.${step.key}.num`)}
-                        </p>
-                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">
-                          {t(`steps.${step.key}.title`)}
-                        </h3>
-                        <p className="text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-400 font-medium">
-                          {t(`steps.${step.key}.desc`)}
-                        </p>
-                      </div>
                     </div>
-                  );
-                })}
-              </div>
 
-              {/* Bottom Line Connection to Button */}
-              <div className="absolute bottom-0 left-[-2px] w-8 h-px border-b-2 border-dashed border-slate-300 dark:border-slate-700" />
-              
-              <div className="absolute -bottom-5 left-10">
+                    {/* Content */}
+                    <div className="pt-1">
+                      <p className="text-[9px] font-black tracking-[0.28em] uppercase mb-2"
+                         style={{ color: step.color }}>
+                        {t(`steps.${step.key}.num`)}
+                      </p>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3 leading-snug">
+                        {t(`steps.${step.key}.title`)}
+                      </h3>
+                      <p className="text-[14px] leading-relaxed text-slate-500 dark:text-slate-400 font-medium">
+                        {t(`steps.${step.key}.desc`)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* CTA */}
+              <div className="mt-10 pt-10 border-t border-slate-100 dark:border-white/[0.06]">
                 <button
                   onClick={() => setIsBookingModalOpen(true)}
-                  className="inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1"
+                  className="group inline-flex items-center gap-2.5 px-7 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-xl transition-all duration-300"
+                  style={{ boxShadow: "0 0 28px rgba(59,130,246,0.3)" }}
                 >
                   {t("cta")}
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
-      
-      <BookingModal 
+      </section>
+
+      <BookingModal
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
       />
