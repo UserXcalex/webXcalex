@@ -83,7 +83,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Xcalex Logo"
-                className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+                className="h-18 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
               />
             </div>
 
