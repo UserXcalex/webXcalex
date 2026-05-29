@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:web-xcalex.vercel.app)"
+      "WebFetch(domain:web-xcalex.vercel.app)",
+      "WebSearch",
+      "WebFetch(domain:codepen.io)",
+      "WebFetch(domain:www.superozonoglobal.com)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\LENOVO\\\\Desktop\\\\SuperOzono\\\\webXcalex\\\\public\\\\landing\\\\ecommerce\")",
+      "WebFetch(domain:biozonogroup.com)"
     ]
   }
 }

@@ -297,6 +297,17 @@ body {
 }
 
 /* =============================
+   Splash → Page transition
+   ============================= */
+@keyframes xcl-pagefade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+body.xcl-page-in > * {
+  animation: xcl-pagefade 0.9s ease-out both;
+}
+
+/* =============================
    Xaia Widget — tooltip auto-dismiss
    ============================= */
 #xaia-launcher-tooltip.show {

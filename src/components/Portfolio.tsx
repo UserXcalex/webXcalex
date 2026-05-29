@@ -2,7 +2,171 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
-import { ArrowUpRight, ExternalLink, CheckCircle, Clock, Zap } from "lucide-react";
+import { ArrowUpRight, ExternalLink, CheckCircle, Clock, Zap, Monitor, X, RefreshCw } from "lucide-react";
+
+/* ─────────────────────────────────────────────
+   Live Preview Modal
+───────────────────────────────────────────── */
+function LivePreviewModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const [status, setStatus] = useState<"loading" | "loaded" | "blocked">("loading");
+  const [imgIdx, setImgIdx] = useState(0);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Timeout: si en 6s no cargó, asumimos bloqueado
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (status === "loading") setStatus("blocked");
+    }, 6000);
+    return () => clearTimeout(t);
+  }, [status]);
+
+  // Auto-cycle screenshots en fallback
+  useEffect(() => {
+    if (status !== "blocked" || project.images.length <= 1) return;
+    const id = setInterval(() => setImgIdx(i => (i + 1) % project.images.length), 3000);
+    return () => clearInterval(id);
+  }, [status, project.images.length]);
+
+  // Cerrar con Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[9998] flex items-center justify-center p-4 lg:p-8"
+      style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(12px)" }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div
+        className="w-full flex flex-col rounded-2xl overflow-hidden"
+        style={{
+          maxWidth: 1200,
+          height: "88vh",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: `0 0 0 1px rgba(${project.accentRgb},0.2), 0 32px 80px rgba(0,0,0,0.6)`,
+        }}
+      >
+        {/* ── Browser chrome ── */}
+        <div
+          className="flex items-center gap-3 px-4 py-3 flex-shrink-0"
+          style={{ background: "#0d0d1a", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+        >
+          {/* Window buttons */}
+          <div className="flex gap-1.5">
+            <button onClick={onClose}
+              className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"
+              title="Cerrar" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+            <div className="w-3 h-3 rounded-full bg-green-500/60" />
+          </div>
+
+          {/* URL bar */}
+          <div
+            className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg text-[12px] font-mono text-slate-400 truncate"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
+          >
+            <div className="w-2 h-2 rounded-full flex-shrink-0"
+              style={{ background: status === "loaded" ? "#4ade80" : status === "blocked" ? "#f59e0b" : "#3b82f6" }} />
+            <span className="truncate">{project.link}</span>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-1.5">
+            {status === "blocked" && (
+              <button
+                onClick={() => { setStatus("loading"); }}
+                className="p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all"
+                title="Reintentar"
+              >
+                <RefreshCw size={13} />
+              </button>
+            )}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-black uppercase tracking-wider text-white transition-all"
+              style={{ background: `rgba(${project.accentRgb},0.85)` }}
+            >
+              <ExternalLink size={11} />
+              Abrir
+            </a>
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-lg text-slate-500 hover:text-white hover:bg-white/5 transition-all"
+            >
+              <X size={15} />
+            </button>
+          </div>
+        </div>
+
+        {/* ── Content area ── */}
+        <div className="relative flex-1 overflow-hidden" style={{ background: "#f8fafc" }}>
+
+          {/* Loading */}
+          {status === "loading" && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[#0d0d1a] z-10">
+              <div
+                className="w-10 h-10 rounded-full border-2 border-blue-500/30 border-t-blue-500 animate-spin"
+              />
+              <p className="text-slate-500 text-[12px] font-mono tracking-widest uppercase">Cargando vista previa…</p>
+              <p className="text-slate-700 text-[10px] font-mono">Si no carga, el sitio bloquea embedding</p>
+            </div>
+          )}
+
+          {/* Blocked fallback — screenshot carousel */}
+          {status === "blocked" && (
+            <div className="absolute inset-0 flex flex-col bg-[#0d0d1a] z-10">
+              {/* Notice */}
+              <div
+                className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold flex-shrink-0"
+                style={{ background: `rgba(${project.accentRgb},0.12)`, color: project.accent, borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+              >
+                <Monitor size={12} />
+                Este sitio tiene políticas de seguridad que impiden el embedding — mostrando capturas de pantalla reales
+                <a href={project.link} target="_blank" rel="noopener noreferrer"
+                  className="ml-auto flex items-center gap-1 underline underline-offset-2 opacity-80 hover:opacity-100">
+                  Ver en vivo <ExternalLink size={10} />
+                </a>
+              </div>
+              {/* Screenshots */}
+              <div className="relative flex-1 overflow-hidden">
+                {project.images.map((src, i) => (
+                  <img key={src} src={src} alt={`${project.name} ${i + 1}`}
+                    className="absolute inset-0 w-full h-full object-contain transition-opacity duration-700"
+                    style={{ opacity: i === imgIdx ? 1 : 0 }} />
+                ))}
+                {project.images.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    {project.images.map((_, i) => (
+                      <button key={i} onClick={() => setImgIdx(i)}
+                        className="rounded-full transition-all duration-300"
+                        style={{ width: i === imgIdx ? 20 : 7, height: 7,
+                          background: i === imgIdx ? project.accent : "rgba(255,255,255,0.25)" }} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Iframe */}
+          <iframe
+            ref={iframeRef}
+            src={status !== "blocked" ? project.link : undefined}
+            title={project.name}
+            className="w-full h-full border-0"
+            onLoad={() => setStatus("loaded")}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ─────────────────────────────────────────────
    Types
@@ -15,7 +179,7 @@ type Project = {
   cats: string[];
   catLabel: string;
   desc: string;
-  image: string;
+  images: string[];
   techs: string[];
   status: "live" | "dev" | "done";
   year: string;
@@ -45,6 +209,97 @@ const CATS = [
 ───────────────────────────────────────────── */
 const PROJECTS: Project[] = [
   {
+    id: 12,
+    name: "Portal Super Ozono Global",
+    client: "Super Ozono Global",
+    initials: "SO",
+    cats: ["web", "ecomm"],
+    catLabel: "E-Commerce · Portal de Marca",
+    desc: "Portal completo de marca con tienda de productos agrícolas, mini-academia con certificación Advisor, sistema de membresías, pasarela de pagos integrada y blog editorial — todo en una sola experiencia de marca para el mercado agro latinoamericano.",
+    images: [
+      "/e-commerce/super-ozono/portal-intro.png",
+      "/e-commerce/super-ozono/vista-tienda.png",
+    ],
+    techs: ["Next.js", "WooCommerce", "Stripe", "Tailwind CSS", "Vercel"],
+    status: "live",
+    year: "2025",
+    link: "https://www.superozonoglobal.com/super-ozono/",
+    featured: true,
+    accent: "#f59e0b",
+    accentRgb: "245,158,11",
+  },
+  {
+    id: 13,
+    name: "Biozono Group",
+    client: "Biozono Group",
+    initials: "BZ",
+    cats: ["web", "ecomm"],
+    catLabel: "E-Commerce · Agro Biotech",
+    desc: "Portal e-commerce con tienda de productos agrobiotecnológicos (Bioinductor, Biosuelos, Bioinsectos, Biocida 2.0), sistema de membresías por niveles (Afiliado / Empresario / Ingeniería), certificación internacional y soporte multi-idioma para LATAM.",
+    images: [
+      "/e-commerce/Biozono/biozono-vista-principal.png",
+      "/e-commerce/Biozono/vista-productos.png",
+    ],
+    techs: ["Next.js", "WooCommerce", "Tailwind CSS", "Vercel"],
+    status: "live",
+    year: "2025",
+    link: "https://biozonogroup.com",
+    featured: false,
+    accent: "#22c55e",
+    accentRgb: "34,197,94",
+  },
+  {
+    id: 9,
+    name: "Acciones Super Ozono",
+    client: "Super Ozono Global",
+    initials: "SO",
+    cats: ["web", "mkt"],
+    catLabel: "Landing · Inversión Agrícola",
+    desc: "Landing page de captación de inversores para Super Ozono Global. Presenta la oportunidad de adquirir el 49% de las acciones de la empresa con expansión activa en LATAM, integrando formulario de asesoría conectado a automatización de leads.",
+    images: ["/landing/acciones/acciones1.png", "/landing/acciones/acciones2.png"],
+    techs: ["Next.js", "Tailwind CSS", "n8n", "Vercel"],
+    status: "live",
+    year: "2025",
+    link: "https://acciones.superozonoglobal.com",
+    featured: false,
+    accent: "#16a34a",
+    accentRgb: "22,163,74",
+  },
+  {
+    id: 10,
+    name: "Transferencia Tecnológica",
+    client: "Super Ozono Global",
+    initials: "SO",
+    cats: ["web", "mkt"],
+    catLabel: "Landing · Agro Tech",
+    desc: "Plataforma de ventas de tecnología de ozono para el sector agrícola. Presenta planes Ejecutivo y Pro con resultados comprobados: +30% rendimiento del cultivo, -50% uso de agroquímicos y 0% residuos químicos.",
+    images: ["/landing/transferencia/transferencia1.png", "/landing/transferencia/transferencia2.png"],
+    techs: ["Next.js", "Tailwind CSS", "n8n", "Vercel"],
+    status: "live",
+    year: "2025",
+    link: "https://transferencia.superozonoglobal.com",
+    featured: false,
+    accent: "#059669",
+    accentRgb: "5,150,105",
+  },
+  {
+    id: 11,
+    name: "Certificaciones Super Ozono",
+    client: "Super Ozono Global",
+    initials: "SO",
+    cats: ["web", "mkt"],
+    catLabel: "Landing · Formación Agrícola",
+    desc: "Landing de registro para webinar con certificación internacional en tecnología de ozono agrícola. Capta inscripciones para el programa que habilita a agricultores a dominar y liderar el mercado agro de alto rendimiento.",
+    images: ["/landing/certificaciones/certificaciones1.png"],
+    techs: ["Next.js", "Tailwind CSS", "n8n", "Vercel"],
+    status: "live",
+    year: "2025",
+    link: "https://certificaciones.superozonoglobal.com",
+    featured: false,
+    accent: "#2563eb",
+    accentRgb: "37,99,235",
+  },
+  {
     id: 1,
     name: "NexPay Dashboard",
     client: "NexPay Financial",
@@ -52,12 +307,12 @@ const PROJECTS: Project[] = [
     cats: ["web", "ai"],
     catLabel: "IA + Desarrollo Web",
     desc: "Plataforma de gestión financiera con IA integrada para análisis predictivo, alertas inteligentes y reportes en tiempo real para equipos de finanzas.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Next.js", "Python", "TensorFlow", "AWS"],
     status: "live",
     year: "2024",
     link: "#",
-    featured: true,
+    featured: false,
     accent: "#3b82f6",
     accentRgb: "59,130,246",
   },
@@ -69,7 +324,7 @@ const PROJECTS: Project[] = [
     cats: ["ecomm", "web"],
     catLabel: "E-Commerce Premium",
     desc: "Headless commerce de alta performance soportando 10k usuarios concurrentes. Conversión mejorada 2.1× y cargas 38% más rápidas.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Next.js", "Shopify", "GraphQL", "Redis"],
     status: "live",
     year: "2024",
@@ -86,7 +341,7 @@ const PROJECTS: Project[] = [
     cats: ["ai", "auto"],
     catLabel: "IA + Automatización",
     desc: "Sistema de automatización inteligente con LLMs para procesamiento autónomo de documentos, validaciones y decisiones operativas.",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Python", "GPT-4o", "n8n", "PostgreSQL"],
     status: "live",
     year: "2024",
@@ -103,7 +358,7 @@ const PROJECTS: Project[] = [
     cats: ["brand", "design"],
     catLabel: "Branding + Diseño",
     desc: "Sistema de identidad visual completo para venture capital. Logo, paleta, tipografía, guidelines y aplicaciones digitales.",
-    image: "https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Figma", "Illustrator", "After Effects"],
     status: "done",
     year: "2023",
@@ -120,7 +375,7 @@ const PROJECTS: Project[] = [
     cats: ["bot", "ai"],
     catLabel: "Bot Inteligente",
     desc: "Asistente conversacional con IA desplegado en WhatsApp, web y Telegram con resolución autónoma del 74% de consultas.",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Python", "WhatsApp API", "OpenAI", "MongoDB"],
     status: "live",
     year: "2024",
@@ -137,7 +392,7 @@ const PROJECTS: Project[] = [
     cats: ["mkt", "auto"],
     catLabel: "Marketing Automatizado",
     desc: "Ecosistema de marketing digital con embudos automatizados, campañas inteligentes y analytics de conversión avanzados.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Meta Ads", "n8n", "GA4", "HubSpot"],
     status: "live",
     year: "2024",
@@ -154,7 +409,7 @@ const PROJECTS: Project[] = [
     cats: ["web", "auto"],
     catLabel: "Plataforma Empresarial",
     desc: "Portal de gestión operativa con módulos de inventario, proyectos y reportes. Implementado en 60 días sin fricción.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"],
     techs: ["React", "Node.js", "PostgreSQL", "Docker"],
     status: "done",
     year: "2023",
@@ -171,7 +426,7 @@ const PROJECTS: Project[] = [
     cats: ["design", "web"],
     catLabel: "UI Design System",
     desc: "Design system completo con 200+ componentes React, tokens de diseño, Storybook y documentación interactiva para equipos de producto.",
-    image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1600&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1600&auto=format&fit=crop"],
     techs: ["Figma", "Storybook", "React", "TypeScript"],
     status: "live",
     year: "2024",
@@ -256,10 +511,17 @@ function ClientLogo({ initials, accent, accentRgb, size = "sm" }: { initials: st
 /* ─────────────────────────────────────────────
    Featured card (full-width horizontal)
 ───────────────────────────────────────────── */
-function FeaturedCard({ p }: { p: Project }) {
+function FeaturedCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
   const [hovered, setHovered] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
   const st = STATUS_MAP[p.status];
   const StatusIcon = st.icon;
+
+  useEffect(() => {
+    if (p.images.length <= 1) return;
+    const id = setInterval(() => setImgIdx(i => (i + 1) % p.images.length), 3200);
+    return () => clearInterval(id);
+  }, [p.images.length]);
 
   return (
     <div
@@ -332,9 +594,11 @@ function FeaturedCard({ p }: { p: Project }) {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 flex-wrap">
             <a
               href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group/btn inline-flex items-center gap-2 px-6 py-3.5 text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-xl transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, ${p.accent}, rgba(${p.accentRgb},0.7))`,
@@ -344,18 +608,38 @@ function FeaturedCard({ p }: { p: Project }) {
               Ver Proyecto
               <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
             </a>
+            {p.link !== "#" && (
+              <button
+                onClick={onPreview}
+                className="inline-flex items-center gap-2 px-5 py-3.5 font-black text-[11px] uppercase tracking-[0.2em] rounded-xl transition-all duration-300 border"
+                style={{
+                  color: p.accent,
+                  borderColor: `rgba(${p.accentRgb},0.3)`,
+                  background: `rgba(${p.accentRgb},0.06)`,
+                }}
+              >
+                <Monitor size={13} />
+                Vista Previa
+              </button>
+            )}
             <span className="text-slate-400 dark:text-slate-600 text-[11px] font-bold uppercase tracking-wider">{p.year}</span>
           </div>
         </div>
 
-        {/* ── Right: Image ── */}
+        {/* ── Right: Image carousel ── */}
         <div className="relative overflow-hidden min-h-[300px] lg:min-h-0">
-          <img
-            src={p.image}
-            alt={p.name}
-            className="w-full h-full object-cover transition-transform duration-700"
-            style={{ transform: hovered ? "scale(1.05)" : "scale(1)" }}
-          />
+          {p.images.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${p.name} ${i + 1}`}
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+              style={{
+                opacity: i === imgIdx ? 1 : 0,
+                transform: i === imgIdx ? (hovered ? "scale(1.05)" : "scale(1)") : "scale(1.02)",
+              }}
+            />
+          ))}
           {/* Gradient overlay */}
           <div
             className="absolute inset-0 transition-opacity duration-500"
@@ -373,6 +657,23 @@ function FeaturedCard({ p }: { p: Project }) {
               ★ Proyecto Destacado
             </span>
           </div>
+          {/* Dots */}
+          {p.images.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              {p.images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setImgIdx(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === imgIdx ? 18 : 6,
+                    height: 6,
+                    background: i === imgIdx ? p.accent : "rgba(255,255,255,0.4)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -382,10 +683,17 @@ function FeaturedCard({ p }: { p: Project }) {
 /* ─────────────────────────────────────────────
    Regular card
 ───────────────────────────────────────────── */
-function ProjectCard({ p }: { p: Project }) {
+function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
   const [hovered, setHovered] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
   const st = STATUS_MAP[p.status];
   const StatusIcon = st.icon;
+
+  useEffect(() => {
+    if (p.images.length <= 1) return;
+    const id = setInterval(() => setImgIdx(i => (i + 1) % p.images.length), 3500);
+    return () => clearInterval(id);
+  }, [p.images.length]);
 
   return (
     <div
@@ -410,12 +718,34 @@ function ProjectCard({ p }: { p: Project }) {
 
       {/* ── Image area ── */}
       <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
-        <img
-          src={p.image}
-          alt={p.name}
-          className="w-full h-full object-cover transition-transform duration-600"
-          style={{ transform: hovered ? "scale(1.07)" : "scale(1)" }}
-        />
+        {p.images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={`${p.name} ${i + 1}`}
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+            style={{
+              opacity: i === imgIdx ? 1 : 0,
+              transform: i === imgIdx ? (hovered ? "scale(1.07)" : "scale(1)") : "scale(1.02)",
+            }}
+          />
+        ))}
+        {/* Dot indicators */}
+        {p.images.length > 1 && (
+          <div className="absolute bottom-2 right-3 flex gap-1 z-20">
+            {p.images.map((_, i) => (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === imgIdx ? 12 : 5,
+                  height: 5,
+                  background: i === imgIdx ? p.accent : "rgba(255,255,255,0.45)",
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Category badge */}
         <div className="absolute top-4 left-4 z-20">
@@ -446,21 +776,30 @@ function ProjectCard({ p }: { p: Project }) {
               transform: hovered ? "translateY(0)" : "translateY(12px)",
             }}
           >
-            <p className="text-white/85 text-[13px] leading-relaxed font-medium mb-4 line-clamp-2">
+            <p className="text-white/85 text-[13px] leading-relaxed font-medium mb-3 line-clamp-2">
               {p.desc}
             </p>
-            <a
-              href={p.link}
-              className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-4 py-2 rounded-lg transition-all duration-200"
-              style={{
-                background: `rgba(${p.accentRgb},0.9)`,
-                boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)`,
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              Ver proyecto
-              <ExternalLink size={11} />
-            </a>
+            <div className="flex gap-2">
+              <a
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
+                style={{ background: `rgba(${p.accentRgb},0.9)`, boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)` }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                Ver <ExternalLink size={10} />
+              </a>
+              {p.link !== "#" && (
+                <button
+                  className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
+                  style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.15)" }}
+                  onClick={(e) => { e.stopPropagation(); onPreview(); }}
+                >
+                  <Monitor size={10} /> Preview
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -530,6 +869,7 @@ export default function Portfolio() {
 
   const [activeFilter, setActiveFilter] = useState("all");
   const [filterKey, setFilterKey] = useState(0);
+  const [previewProject, setPreviewProject] = useState<Project | null>(null);
 
   const handleFilter = (id: string) => {
     if (id === activeFilter) return;
@@ -545,6 +885,7 @@ export default function Portfolio() {
   const grid     = featured ? filtered.filter((p) => !p.featured) : filtered;
 
   return (
+    <>
     <section
       id="portfolio"
       ref={sectionRef}
@@ -653,7 +994,7 @@ export default function Portfolio() {
           {/* Featured */}
           {featured && (
             <div className="mb-6">
-              <FeaturedCard p={featured} />
+              <FeaturedCard p={featured} onPreview={() => setPreviewProject(featured)} />
             </div>
           )}
 
@@ -661,7 +1002,7 @@ export default function Portfolio() {
           {grid.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
               {grid.map((p) => (
-                <ProjectCard key={p.id} p={p} />
+                <ProjectCard key={p.id} p={p} onPreview={() => setPreviewProject(p)} />
               ))}
             </div>
           )}
@@ -716,5 +1057,14 @@ export default function Portfolio() {
         </div>
       </div>
     </section>
+
+    {/* Live Preview Modal */}
+    {previewProject && (
+      <LivePreviewModal
+        project={previewProject}
+        onClose={() => setPreviewProject(null)}
+      />
+    )}
+    </>
   );
 }

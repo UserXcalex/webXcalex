@@ -132,23 +132,23 @@
     "title": "Proyectos Que Marcaron la Diferencia",
     "description": "Proyectos reales. Resultados medibles. Soluciones de impacto directo.",
     "items": {
-      "fintech": {
-        "industry": "Fintech",
-        "title": "Re-arquitectura de plataforma de pagos con 99.95% de disponibilidad.",
-        "desc": "Un procesador de pagos regional reemplazó un monolito de una década: microservicios en AWS, API gateway personalizada y migración en 60 días sin interrupción. $1.2M ahorrados en infraestructura anual.",
-        "tags": ["AWS", "Microservicios"]
+      "acciones": {
+        "industry": "Agroindustria · Inversión",
+        "title": "Landing de inversión agrícola que captura asesados calificados para Super Ozono Global.",
+        "desc": "Diseñamos una landing page de alta conversión para presentar la oportunidad de adquirir el 49% de las acciones de Super Ozono Global, empresa líder en tecnología de ozono para el agro en LATAM. Formulario de asesoría con automatización de leads vía n8n.",
+        "tags": ["Next.js", "Tailwind CSS", "n8n"]
       },
-      "saas": {
-        "industry": "Operaciones / SaaS",
-        "title": "Incorporación de clientes reducida de 4 días a solo 6 horas.",
-        "desc": "Motor de incorporación inteligente con análisis de documentos por IA, flujos de validación automatizados y portal de cliente en tiempo real. NPS mejoró 28 puntos. Rotación de clientes bajó 35%.",
-        "tags": ["IA Generativa", "Automatización"]
+      "transferencia": {
+        "industry": "Agro Tech · Ventas",
+        "title": "Plataforma de ventas tecnológicas con +30% de rendimiento agrícola comprobado.",
+        "desc": "Landing de ventas para tecnología de ozono aplicada al agro. Presenta planes Ejecutivo y Pro con resultados reales: +30% rendimiento del cultivo, -50% uso de agroquímicos, 0% residuos químicos. Captura de leads calificados con formulario integrado.",
+        "tags": ["Diseño UI/UX", "Agro Tech", "Conversión"]
       },
-      "ecommerce": {
-        "industry": "E-Commerce",
-        "title": "Headless Commerce que soporta 10k usuarios concurrentes sin caída.",
-        "desc": "Frontend en Next.js, capa API con caché en el borde y CMS personalizado para equipos de marketing. Cero inactividad en picos de ventas. Conversión mejoró 2.1x. Cargas 38% más rápidas.",
-        "tags": ["Next.js", "Edge Caching"]
+      "certificaciones": {
+        "industry": "Agro Tech · Formación",
+        "title": "Landing de webinar que convierte agricultores en operadores certificados de tecnología de ozono.",
+        "desc": "Diseñamos una landing de registro para el programa de certificación internacional de Super Ozono Global. Dark theme de alto impacto, sección de temario, FAQ y CTA directo a inscripción. Captura leads calificados con automatización vía n8n.",
+        "tags": ["Next.js", "Tailwind CSS", "n8n"]
       }
     }
   },
