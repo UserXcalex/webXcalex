@@ -5,7 +5,6 @@ import Services from "@/components/Services";
 import WhyXcalex from "@/components/WhyXcalex";
 import Metrics from "@/components/Metrics";
 import Process from "@/components/Process";
-import CaseStudies from "@/components/CaseStudies";
 import TechStack from "@/components/TechStack";
 import Portfolio from "@/components/Portfolio";
 import Pricing from "@/components/Pricing";
@@ -23,7 +22,6 @@ export default function Home() {
       <WhyXcalex />
       <Metrics />
       <Process />
-      <CaseStudies />
       <Portfolio />
       <TechStack />
       <Pricing />

@@ -32,14 +32,14 @@ export default function Navbar() {
         scrolled ? "glass-nav shadow-lg shadow-black/5 dark:shadow-black/30" : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[72px]">
+      <nav className="max-w-7xl mx-auto px-6 lg:px-18 flex items-center justify-between h-16 lg:h-[72px]">
 
         {/* Logo */}
         <Link href="/" className="flex items-center group flex-shrink-0">
           <img
             src="/logo.png"
             alt="Xcalex Logo"
-            className="h-11 lg:h-12 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
+            className="h-10 lg:h-16 w-auto object-contain transition-all duration-300 group-hover:opacity-80"
           />
         </Link>
 

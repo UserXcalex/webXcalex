@@ -4,6 +4,7 @@ import { getMessages } from 'next-intl/server';
 import { Inter } from "next/font/google";
 import "../globals.css";
 import ChatBot from "@/components/ChatBot";
+import SplashScreen from "@/components/SplashScreen";
 import Script from "next/script";
 
 const inter = Inter({
@@ -59,6 +60,7 @@ export default async function LocaleLayout({
           messages={messages}
           timeZone="America/Bogota" // Ajusta a tu zona si quieres
         >
+          <SplashScreen />
           <div id="theme-reveal-overlay" aria-hidden="true" />
           {children}
           {/* <ChatBot /> */}

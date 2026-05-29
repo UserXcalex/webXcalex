@@ -7,22 +7,25 @@ import { useTranslations } from "next-intl";
 
 const casesData = [
   {
-    key: "fintech",
-    accent: "#3b82f6",
-    accentBg: "rgba(59,130,246,0.1)",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop",
+    key: "acciones",
+    accent: "#16a34a",
+    accentBg: "rgba(22,163,74,0.1)",
+    image: "/landing/acciones/acciones2.png",
+    link: "https://acciones.superozonoglobal.com",
   },
   {
-    key: "saas",
-    accent: "#8b5cf6",
-    accentBg: "rgba(139,92,246,0.1)",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
+    key: "transferencia",
+    accent: "#059669",
+    accentBg: "rgba(5,150,105,0.1)",
+    image: "/landing/transferencia/transferencia1.png",
+    link: "https://transferencia.superozonoglobal.com",
   },
   {
-    key: "ecommerce",
-    accent: "#06b6d4",
-    accentBg: "rgba(6,182,212,0.1)",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1600&auto=format&fit=crop",
+    key: "certificaciones",
+    accent: "#2563eb",
+    accentBg: "rgba(37,99,235,0.1)",
+    image: "/landing/certificaciones/certificaciones1.png",
+    link: "https://certificaciones.superozonoglobal.com",
   },
 ];
 
@@ -31,11 +34,13 @@ function CaseCard({
   accent,
   accentBg,
   image,
+  link,
 }: {
   itemKey: string;
   accent: string;
   accentBg: string;
   image: string;
+  link: string;
 }) {
   const t = useTranslations("CaseStudies");
   const [hovered, setHovered] = useState(false);
@@ -133,16 +138,20 @@ function CaseCard({
 
         {/* Bottom: arrow */}
         <div className="flex items-end justify-end mt-auto pt-8">
-          <div
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-400"
             style={{
               border: `1px solid ${hovered ? accent + "60" : "rgba(15,23,42,0.12)"}`,
               background: hovered ? accentBg : "transparent",
               color: hovered ? accent : "rgb(148,163,184)",
             }}
+            onClick={(e) => e.stopPropagation()}
           >
             <ArrowUpRight size={16} />
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -194,6 +203,7 @@ export default function CaseStudies() {
               accent={c.accent}
               accentBg={c.accentBg}
               image={c.image}
+              link={c.link}
             />
           ))}
         </div>
