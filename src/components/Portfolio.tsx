@@ -595,14 +595,13 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
   return (
     <div
-      className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer"
+      className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer h-full"
       style={{
         border: "1px solid rgba(15,23,42,0.08)",
         background: "#ffffff",
         boxShadow: hovered
           ? `0 0 0 1px rgba(${p.accentRgb},0.18), 0 24px 56px rgba(${p.accentRgb},0.08), 0 8px 24px rgba(15,23,42,0.06)`
           : "0 2px 8px rgba(15,23,42,0.05)",
-        transform: hovered ? "translateY(-6px)" : "none",
         transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
       }}
       onMouseEnter={() => setHovered(true)}
@@ -721,7 +720,7 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
         {/* Name */}
         <h3
-          className="font-black text-[16px] text-slate-900 dark:text-white leading-snug mb-3 transition-colors duration-300"
+          className="font-black text-[16px] text-slate-900 dark:text-white leading-snug mb-3 transition-colors duration-300 line-clamp-2 min-h-[2.75rem]"
           style={{ color: hovered ? p.accent : undefined }}
         >
           {p.name}

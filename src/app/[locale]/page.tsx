@@ -1,33 +1,25 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
-import Services from "@/components/Services";
-import WhyXcalex from "@/components/WhyXcalex";
-import Metrics from "@/components/Metrics";
+import WhatWeBuild from "@/components/WhatWeBuild";
 import Process from "@/components/Process";
-import TechStack from "@/components/TechStack";
 import Portfolio from "@/components/Portfolio";
 import Pricing from "@/components/Pricing";
-import Authority from "@/components/Authority";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <Hero />
-      <TrustBar />
-      <Services />
-      <WhyXcalex />
-      <Metrics />
+      <WhatWeBuild />
       <Process />
       <Portfolio />
-      <TechStack />
       <Pricing />
-      <Authority />
       <FinalCTA />
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 }
