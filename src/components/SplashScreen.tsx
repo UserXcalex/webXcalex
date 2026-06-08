@@ -107,30 +107,42 @@ export default function SplashScreen() {
 
   /* Session gate + phase scheduler */
   useEffect(() => {
-    if (sessionStorage.getItem("xcalex_intro")) {
+    let active = true;
+
+    const dismiss = () => {
+      if (!active) return;
+      active = false;
+      setPhase("done");
+      document.body.style.overflow = "";
+      document.body.classList.remove("xcl-page-in");
+      try { sessionStorage.setItem("xcalex_intro", "1"); } catch (_) {}
+    };
+
+    let hasVisited = false;
+    try { hasVisited = !!sessionStorage.getItem("xcalex_intro"); } catch (_) {}
+
+    if (hasVisited) {
       setPhase("returning" as Phase);
-      const t = setTimeout(() => setPhase("done"), 2000);
-      return () => clearTimeout(t);
+      const t = setTimeout(dismiss, 2000);
+      return () => { active = false; clearTimeout(t); };
     }
+
     document.body.style.overflow = "hidden";
 
     const timers = [
-      setTimeout(() => setPhase("logo"),   1200),
-      setTimeout(() => setPhase("hud"),    2700),
-      setTimeout(() => setPhase("online"), 3700),
-      setTimeout(() => setPhase("exit"),   4400),
-      setTimeout(() => {
-        // Fade page in BEFORE removing splash so there's no hard pop
-        document.body.classList.add("xcl-page-in");
-      }, 4500),
-      setTimeout(() => {
-        setPhase("done");
-        document.body.style.overflow = "";
-        document.body.classList.remove("xcl-page-in");
-        sessionStorage.setItem("xcalex_intro", "1");
-      }, 5600),
+      setTimeout(() => { if (active) setPhase("logo");   }, 1200),
+      setTimeout(() => { if (active) setPhase("hud");    }, 2700),
+      setTimeout(() => { if (active) setPhase("online"); }, 3700),
+      setTimeout(() => { if (active) setPhase("exit");   }, 4400),
+      setTimeout(() => { if (active) document.body.classList.add("xcl-page-in"); }, 4500),
+      setTimeout(dismiss, 5600),
     ];
-    return () => { timers.forEach(clearTimeout); document.body.style.overflow = ""; };
+    return () => {
+      active = false;
+      timers.forEach(clearTimeout);
+      document.body.style.overflow = "";
+      document.body.classList.remove("xcl-page-in");
+    };
   }, []);
 
   /* Exit strips: mount at X=0, then slide out after 1 frame */

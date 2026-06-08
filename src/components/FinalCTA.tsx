@@ -4,6 +4,7 @@ import { useInView } from "@/hooks/useInView";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import LeadSuccessAnimation from "./LeadSuccessAnimation";
 
 export default function FinalCTA() {
   const t = useTranslations("FinalCTA");
@@ -11,14 +12,16 @@ export default function FinalCTA() {
   const [showForm, setShowForm] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formData, setFormData] = useState({ name: "", email: "" });
+  const [leadPhase, setLeadPhase] = useState<"sending" | "success" | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.name) return;
     setStatus("loading");
+    setLeadPhase("sending");
     try {
       const res = await fetch(
-        "https://superozonoglobal.app.n8n.cloud/webhook-test/datos/leads",
+        "https://superozonoglobal.app.n8n.cloud/webhook/datos/leads",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -27,6 +30,7 @@ export default function FinalCTA() {
       );
       if (res.ok) {
         setStatus("success");
+        setLeadPhase("success");
         setFormData({ name: "", email: "" });
         setTimeout(() => { setStatus("idle"); setShowForm(false); }, 3500);
       } else {
@@ -38,6 +42,13 @@ export default function FinalCTA() {
   };
 
   return (
+    <>
+    <LeadSuccessAnimation
+      phase={leadPhase}
+      onDone={() => setLeadPhase(null)}
+      title="¡Consultoría solicitada!"
+      subtitle="Revisaremos tu solicitud y te contactaremos muy pronto."
+    />
     <section
       id="contact"
       ref={ref}
@@ -172,5 +183,6 @@ export default function FinalCTA() {
         </p>
       </div>
     </section>
+    </>
   );
 }

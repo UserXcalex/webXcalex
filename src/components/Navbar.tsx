@@ -12,12 +12,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { label: t("servicios"),      href: "#services" },
-    { label: t("soluciones"),     href: "#solutions" },
-    { label: t("proceso"),        href: "#process" },
-    { label: t("casos_de_exito"), href: "#case-studies" },
-    { label: t("nosotros"),       href: "#about" },
-    { label: t("contacto"),       href: "#contact" },
+    { label: "Servicios",   href: "#services"   },
+    { label: "Proceso",     href: "#process"    },
+    { label: "Portafolio",  href: "#portfolio"  },
+    { label: "Precios",     href: "#pricing"    },
+    { label: "Contacto",    href: "#contact"    },
   ];
 
   useEffect(() => {

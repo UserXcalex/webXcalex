@@ -205,7 +205,7 @@ const CATS = [
 ];
 
 /* ─────────────────────────────────────────────
-   Projects (demo data — ready to be replaced)
+   Projects
 ───────────────────────────────────────────── */
 const PROJECTS: Project[] = [
   {
@@ -300,147 +300,45 @@ const PROJECTS: Project[] = [
     accentRgb: "37,99,235",
   },
   {
-    id: 1,
-    name: "NexPay Dashboard",
-    client: "NexPay Financial",
-    initials: "NP",
-    cats: ["web", "ai"],
-    catLabel: "IA + Desarrollo Web",
-    desc: "Plataforma de gestión financiera con IA integrada para análisis predictivo, alertas inteligentes y reportes en tiempo real para equipos de finanzas.",
-    images: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Next.js", "Python", "TensorFlow", "AWS"],
+    id: 14,
+    name: "Bot de Ventas WhatsApp & Messenger",
+    client: "Xcalex",
+    initials: "XC",
+    cats: ["bot", "ai", "auto"],
+    catLabel: "Bot · Ventas Automatizadas",
+    desc: "Bot inteligente de ventas desplegado en WhatsApp y Messenger que califica leads automáticamente, responde consultas 24/7, envía catálogos y agenda citas — todo sin intervención humana. Integrado con CRM y flujos de n8n para seguimiento automatizado.",
+    images: ["https://images.unsplash.com/photo-1611746872915-64382b5c76da?q=80&w=1600&auto=format&fit=crop"],
+    techs: ["WhatsApp API", "Meta Messenger", "n8n", "OpenAI", "CRM"],
     status: "live",
-    year: "2024",
+    year: "2026",
     link: "#",
     featured: false,
-    accent: "#3b82f6",
-    accentRgb: "59,130,246",
+    accent: "#25d366",
+    accentRgb: "37,211,102",
   },
   {
-    id: 2,
-    name: "Arcova Store",
-    client: "Arcova Capital",
-    initials: "AC",
-    cats: ["ecomm", "web"],
-    catLabel: "E-Commerce Premium",
-    desc: "Headless commerce de alta performance soportando 10k usuarios concurrentes. Conversión mejorada 2.1× y cargas 38% más rápidas.",
-    images: ["https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Next.js", "Shopify", "GraphQL", "Redis"],
+    id: 15,
+    name: "XAIA — Asistente Virtual Web",
+    client: "Xcalex",
+    initials: "XA",
+    cats: ["bot", "ai", "web"],
+    catLabel: "Bot · Asistente Web con IA",
+    desc: "XAIA es el asistente virtual con IA de Xcalex, embebible en cualquier página web con una sola línea de código. Responde preguntas, captura leads, agenda reuniones y convierte visitantes en clientes en tiempo real. Personalizable por marca y entrenado con el conocimiento de cada empresa.",
+    images: ["https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=1600&auto=format&fit=crop"],
+    techs: ["IA Conversacional", "Widget JS", "n8n", "OpenAI", "Webhooks"],
     status: "live",
-    year: "2024",
+    year: "2026",
     link: "#",
     featured: false,
-    accent: "#22d3ee",
-    accentRgb: "34,211,238",
-  },
-  {
-    id: 3,
-    name: "Stratum Intelligence",
-    client: "Stratum AI",
-    initials: "SA",
-    cats: ["ai", "auto"],
-    catLabel: "IA + Automatización",
-    desc: "Sistema de automatización inteligente con LLMs para procesamiento autónomo de documentos, validaciones y decisiones operativas.",
-    images: ["https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Python", "GPT-4o", "n8n", "PostgreSQL"],
-    status: "live",
-    year: "2024",
-    link: "#",
-    featured: false,
-    accent: "#8b5cf6",
-    accentRgb: "139,92,246",
-  },
-  {
-    id: 4,
-    name: "Lumis Brand System",
-    client: "Lumis Ventures",
-    initials: "LV",
-    cats: ["brand", "design"],
-    catLabel: "Branding + Diseño",
-    desc: "Sistema de identidad visual completo para venture capital. Logo, paleta, tipografía, guidelines y aplicaciones digitales.",
-    images: ["https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Figma", "Illustrator", "After Effects"],
-    status: "done",
-    year: "2023",
-    link: "#",
-    featured: false,
-    accent: "#f59e0b",
-    accentRgb: "245,158,11",
-  },
-  {
-    id: 5,
-    name: "VexorBot Assistant",
-    client: "Vexor Systems",
-    initials: "VS",
-    cats: ["bot", "ai"],
-    catLabel: "Bot Inteligente",
-    desc: "Asistente conversacional con IA desplegado en WhatsApp, web y Telegram con resolución autónoma del 74% de consultas.",
-    images: ["https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Python", "WhatsApp API", "OpenAI", "MongoDB"],
-    status: "live",
-    year: "2024",
-    link: "#",
-    featured: false,
-    accent: "#10b981",
-    accentRgb: "16,185,129",
-  },
-  {
-    id: 6,
-    name: "Opallion Growth",
-    client: "Opallion",
-    initials: "OP",
-    cats: ["mkt", "auto"],
-    catLabel: "Marketing Automatizado",
-    desc: "Ecosistema de marketing digital con embudos automatizados, campañas inteligentes y analytics de conversión avanzados.",
-    images: ["https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Meta Ads", "n8n", "GA4", "HubSpot"],
-    status: "live",
-    year: "2024",
-    link: "#",
-    featured: false,
-    accent: "#f43f5e",
-    accentRgb: "244,63,94",
-  },
-  {
-    id: 7,
-    name: "Nordex Platform",
-    client: "Nordex Corp",
-    initials: "NC",
-    cats: ["web", "auto"],
-    catLabel: "Plataforma Empresarial",
-    desc: "Portal de gestión operativa con módulos de inventario, proyectos y reportes. Implementado en 60 días sin fricción.",
-    images: ["https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["React", "Node.js", "PostgreSQL", "Docker"],
-    status: "done",
-    year: "2023",
-    link: "#",
-    featured: false,
-    accent: "#6366f1",
-    accentRgb: "99,102,241",
-  },
-  {
-    id: 8,
-    name: "Veract Design System",
-    client: "Veract Labs",
-    initials: "VL",
-    cats: ["design", "web"],
-    catLabel: "UI Design System",
-    desc: "Design system completo con 200+ componentes React, tokens de diseño, Storybook y documentación interactiva para equipos de producto.",
-    images: ["https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1600&auto=format&fit=crop"],
-    techs: ["Figma", "Storybook", "React", "TypeScript"],
-    status: "live",
-    year: "2024",
-    link: "#",
-    featured: false,
-    accent: "#ec4899",
-    accentRgb: "236,72,153",
+    accent: "#a78bfa",
+    accentRgb: "167,139,250",
   },
 ];
 
 const STATS = [
-  { value: 40, suffix: "+", label: "Proyectos completados" },
-  { value: 25, suffix: "+", label: "Clientes activos"       },
-  { value: 8,  suffix: "",  label: "Servicios ofrecidos"    },
+  { value: 25, suffix: "+", label: "Proyectos completados"  },
+  { value: 12, suffix: "+", label: "Clientes activos"       },
+  { value: 6,  suffix: "",  label: "Servicios ofrecidos"    },
   { value: 3,  suffix: "×", label: "ROI promedio del cliente"},
 ];
 
@@ -704,11 +602,11 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
         boxShadow: hovered
           ? `0 0 0 1px rgba(${p.accentRgb},0.18), 0 24px 56px rgba(${p.accentRgb},0.08), 0 8px 24px rgba(15,23,42,0.06)`
           : "0 2px 8px rgba(15,23,42,0.05)",
-        transform: hovered ? "translateY(-6px)" : "none",
-        transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+        transition: "box-shadow 0.4s cubic-bezier(0.22,1,0.36,1)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onTouchEnd={() => setHovered(false)}
     >
       {/* Dark mode inner */}
       <div
@@ -762,7 +660,7 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
         {/* Hover overlay */}
         <div
-          className="absolute inset-0 z-10 flex flex-col justify-end p-5 transition-all duration-400"
+          className="proj-hover-overlay absolute inset-0 z-10 flex flex-col justify-end p-5 transition-all duration-400"
           style={{
             background: hovered
               ? `linear-gradient(to top, rgba(2,2,10,0.92) 0%, rgba(2,2,10,0.5) 50%, transparent 100%)`
@@ -780,16 +678,18 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
               {p.desc}
             </p>
             <div className="flex gap-2">
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
-                style={{ background: `rgba(${p.accentRgb},0.9)`, boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)` }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                Ver <ExternalLink size={10} />
-              </a>
+              {p.link !== "#" && (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
+                  style={{ background: `rgba(${p.accentRgb},0.9)`, boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)` }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Ver <ExternalLink size={10} />
+                </a>
+              )}
               {p.link !== "#" && (
                 <button
                   className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
@@ -823,7 +723,7 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
         {/* Name */}
         <h3
-          className="font-black text-[16px] text-slate-900 dark:text-white leading-snug mb-3 transition-colors duration-300"
+          className="font-black text-[16px] text-slate-900 dark:text-white leading-snug mb-3 transition-colors duration-300 line-clamp-2 min-h-[2.75rem]"
           style={{ color: hovered ? p.accent : undefined }}
         >
           {p.name}
@@ -935,7 +835,7 @@ export default function Portfolio() {
 
         {/* ── Filter tabs ── */}
         <div className="relative mb-12">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide snap-x">
             {CATS.map((cat) => {
               const isActive = cat.id === activeFilter;
               const count = cat.id === "all"
@@ -945,13 +845,12 @@ export default function Portfolio() {
                 <button
                   key={cat.id}
                   onClick={() => handleFilter(cat.id)}
-                  className="flex-shrink-0 snap-start inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all duration-250 whitespace-nowrap"
+                  className="flex-shrink-0 snap-start inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all duration-250 whitespace-nowrap"
                   style={
                     isActive
                       ? {
                           background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
                           color: "#ffffff",
-                          boxShadow: "0 0 20px rgba(59,130,246,0.3)",
                         }
                       : {
                           background: "transparent",
@@ -976,7 +875,7 @@ export default function Portfolio() {
             })}
           </div>
           {/* Scroll fade right */}
-          <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-slate-50 dark:from-[#02020a] to-transparent pointer-events-none lg:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-50 dark:from-[#02020a] to-transparent pointer-events-none lg:hidden" />
         </div>
 
         {/* ── Projects grid ── */}
@@ -989,6 +888,9 @@ export default function Portfolio() {
               from { opacity: 0; transform: translateY(16px); }
               to   { opacity: 1; transform: translateY(0); }
             }
+            @media (hover: none) {
+              .proj-hover-overlay { display: none !important; }
+            }
           `}</style>
 
           {/* Featured */}
@@ -1000,7 +902,7 @@ export default function Portfolio() {
 
           {/* Grid */}
           {grid.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
               {grid.map((p) => (
                 <ProjectCard key={p.id} p={p} onPreview={() => setPreviewProject(p)} />
               ))}

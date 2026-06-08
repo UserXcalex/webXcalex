@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import BookingModal from "./BookingModal";
+import LeadSuccessAnimation from "./LeadSuccessAnimation";
 import { useTranslations } from "next-intl";
 
 const XIcon = () => (
@@ -20,12 +21,12 @@ const TikTokIcon = () => (
 );
 
 const socials = [
-  { icon: Linkedin,  href: "#" },
-  { icon: Facebook,  href: "#" },
-  { icon: XIcon,     href: "#" },
-  { icon: Instagram, href: "#" },
-  { icon: Youtube,   href: "#" },
-  { icon: TikTokIcon,href: "#" },
+  // { icon: Linkedin,  href: "#" },         // pendiente
+  { icon: Facebook,   href: "https://web.facebook.com/profile.php?id=61590370833802" },
+  // { icon: XIcon,     href: "#" },          // pendiente
+  { icon: Instagram,  href: "https://www.instagram.com/xcalex.oficial/" },
+  // { icon: Youtube,   href: "#" },          // pendiente
+  { icon: TikTokIcon, href: "https://www.tiktok.com/@xcalex.oficial" },
 ];
 
 export default function Footer() {
@@ -33,6 +34,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [leadPhase, setLeadPhase] = useState<"sending" | "success" | null>(null);
 
   const footerNavKeys = ["discover", "resources", "careers"] as const;
 
@@ -40,9 +42,10 @@ export default function Footer() {
     e.preventDefault();
     if (!email) return;
     setStatus("loading");
+    setLeadPhase("sending");
     try {
       const res = await fetch(
-        "https://superozonoglobal.app.n8n.cloud/webhook-test/datos/leads",
+        "https://superozonoglobal.app.n8n.cloud/webhook/datos/leads",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -51,6 +54,7 @@ export default function Footer() {
       );
       if (res.ok) {
         setStatus("success");
+        setLeadPhase("success");
         setEmail("");
         setTimeout(() => setStatus("idle"), 5000);
       } else {
@@ -83,7 +87,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Xcalex Logo"
-                className="h-18 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+                className="h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
               />
             </div>
 
@@ -149,11 +153,18 @@ export default function Footer() {
                   {t("contact.cta")}
                 </button>
                 <a
-                  href="tel:+573128663134"
+                  href="tel:+573171268276"
                   className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-100 dark:border-white/[0.06] bg-slate-50/50 dark:bg-white/[0.02] text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/20 font-bold text-[13px] transition-all duration-200"
                 >
                   <Phone size={15} className="text-blue-500" />
-                  +57 (312) 866-3134
+                  +57 (317) 126-8276
+                </a>
+                <a
+                  href="mailto:presidencia@xcalex.co"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-100 dark:border-white/[0.06] bg-slate-50/50 dark:bg-white/[0.02] text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/20 font-bold text-[13px] transition-all duration-200"
+                >
+                  <Mail size={15} className="text-blue-500" />
+                  presidencia@xcalex.co
                 </a>
               </div>
             </div>
@@ -218,6 +229,12 @@ export default function Footer() {
       </div>
 
       <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
+      <LeadSuccessAnimation
+        phase={leadPhase}
+        onDone={() => setLeadPhase(null)}
+        title="¡Suscrito!"
+        subtitle="Recibirás insights exclusivos de Xcalex directamente en tu correo."
+      />
     </footer>
   );
 }
