@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Phone, Mail, User, Loader2, CheckCircle2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import LeadSuccessAnimation from "./LeadSuccessAnimation";
 
 const countryCodes = [
   { code: "+1", country: "Estados Unidos/Canadá", flag: "US" },
@@ -37,6 +38,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     email: ""
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [leadPhase, setLeadPhase] = useState<"sending" | "success" | null>(null);
 
   const handleSubmit = async () => {
     
@@ -46,7 +48,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
     }
 
     setStatus("loading");
-    
+    setLeadPhase("sending");
     try {
       // Usamos el endpoint de producción para mayor seguridad
       const response = await fetch("https://superozonoglobal.app.n8n.cloud/webhook/datos/leads", {
@@ -63,6 +65,7 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
 
       if (response.ok) {
         setStatus("success");
+        setLeadPhase("success");
         setTimeout(() => {
           onSuccess();
           setFormData({ name: "", countryCode: "+1", phoneNumber: "", email: "" });
@@ -83,6 +86,13 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
   };
 
   return (
+    <>
+    <LeadSuccessAnimation
+      phase={leadPhase}
+      onDone={() => setLeadPhase(null)}
+      title="¡Llamada agendada!"
+      subtitle="Te contactaremos en las próximas horas para confirmar tu consultoría."
+    />
     <div className="space-y-4">
       {/* Nombre */}
       <div>
@@ -197,5 +207,6 @@ export default function BookingForm({ onSuccess }: BookingFormProps) {
         )}
       </button>
     </div>
+    </>
   );
 }
