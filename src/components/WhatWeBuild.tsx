@@ -101,6 +101,7 @@ export default function WhatWeBuild() {
 
   return (
     <section
+      id="services"
       ref={ref}
       className={`relative py-28 lg:py-36 bg-white dark:bg-[#02020a] transition-colors duration-500 overflow-hidden reveal ${inView ? "in-view" : ""}`}
     >

@@ -595,17 +595,18 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
   return (
     <div
-      className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer h-full"
+      className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer"
       style={{
         border: "1px solid rgba(15,23,42,0.08)",
         background: "#ffffff",
         boxShadow: hovered
           ? `0 0 0 1px rgba(${p.accentRgb},0.18), 0 24px 56px rgba(${p.accentRgb},0.08), 0 8px 24px rgba(15,23,42,0.06)`
           : "0 2px 8px rgba(15,23,42,0.05)",
-        transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+        transition: "box-shadow 0.4s cubic-bezier(0.22,1,0.36,1)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onTouchEnd={() => setHovered(false)}
     >
       {/* Dark mode inner */}
       <div
@@ -659,7 +660,7 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
 
         {/* Hover overlay */}
         <div
-          className="absolute inset-0 z-10 flex flex-col justify-end p-5 transition-all duration-400"
+          className="proj-hover-overlay absolute inset-0 z-10 flex flex-col justify-end p-5 transition-all duration-400"
           style={{
             background: hovered
               ? `linear-gradient(to top, rgba(2,2,10,0.92) 0%, rgba(2,2,10,0.5) 50%, transparent 100%)`
@@ -677,16 +678,18 @@ function ProjectCard({ p, onPreview }: { p: Project; onPreview: () => void }) {
               {p.desc}
             </p>
             <div className="flex gap-2">
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
-                style={{ background: `rgba(${p.accentRgb},0.9)`, boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)` }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                Ver <ExternalLink size={10} />
-              </a>
+              {p.link !== "#" && (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
+                  style={{ background: `rgba(${p.accentRgb},0.9)`, boxShadow: `0 0 16px rgba(${p.accentRgb},0.4)` }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Ver <ExternalLink size={10} />
+                </a>
+              )}
               {p.link !== "#" && (
                 <button
                   className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-white px-3 py-2 rounded-lg transition-all duration-200"
@@ -832,7 +835,7 @@ export default function Portfolio() {
 
         {/* ── Filter tabs ── */}
         <div className="relative mb-12">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide snap-x">
             {CATS.map((cat) => {
               const isActive = cat.id === activeFilter;
               const count = cat.id === "all"
@@ -842,13 +845,12 @@ export default function Portfolio() {
                 <button
                   key={cat.id}
                   onClick={() => handleFilter(cat.id)}
-                  className="flex-shrink-0 snap-start inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all duration-250 whitespace-nowrap"
+                  className="flex-shrink-0 snap-start inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-wider transition-all duration-250 whitespace-nowrap"
                   style={
                     isActive
                       ? {
                           background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
                           color: "#ffffff",
-                          boxShadow: "0 0 20px rgba(59,130,246,0.3)",
                         }
                       : {
                           background: "transparent",
@@ -873,7 +875,7 @@ export default function Portfolio() {
             })}
           </div>
           {/* Scroll fade right */}
-          <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-slate-50 dark:from-[#02020a] to-transparent pointer-events-none lg:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-50 dark:from-[#02020a] to-transparent pointer-events-none lg:hidden" />
         </div>
 
         {/* ── Projects grid ── */}
@@ -886,6 +888,9 @@ export default function Portfolio() {
               from { opacity: 0; transform: translateY(16px); }
               to   { opacity: 1; transform: translateY(0); }
             }
+            @media (hover: none) {
+              .proj-hover-overlay { display: none !important; }
+            }
           `}</style>
 
           {/* Featured */}
@@ -897,7 +902,7 @@ export default function Portfolio() {
 
           {/* Grid */}
           {grid.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
               {grid.map((p) => (
                 <ProjectCard key={p.id} p={p} onPreview={() => setPreviewProject(p)} />
               ))}

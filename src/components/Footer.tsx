@@ -24,7 +24,7 @@ const socials = [
   // { icon: Linkedin,  href: "#" },         // pendiente
   { icon: Facebook,   href: "https://web.facebook.com/profile.php?id=61590370833802" },
   // { icon: XIcon,     href: "#" },          // pendiente
-  { icon: Instagram,  href: "https://www.instagram.com/xcalex.oficial?igsh=M2lyMWg4cXB5b2U4" },
+  { icon: Instagram,  href: "https://www.instagram.com/xcalex.oficial/" },
   // { icon: Youtube,   href: "#" },          // pendiente
   { icon: TikTokIcon, href: "https://www.tiktok.com/@xcalex.oficial" },
 ];
