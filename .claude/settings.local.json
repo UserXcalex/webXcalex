@@ -6,7 +6,12 @@
       "WebFetch(domain:codepen.io)",
       "WebFetch(domain:www.superozonoglobal.com)",
       "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\LENOVO\\\\Desktop\\\\SuperOzono\\\\webXcalex\\\\public\\\\landing\\\\ecommerce\")",
-      "WebFetch(domain:biozonogroup.com)"
+      "WebFetch(domain:biozonogroup.com)",
+      "Bash(npx next *)",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 3517 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { Stop-Process -Id $conn.OwningProcess -Force -Confirm:$false; \"Servidor de prueba detenido\" } else { \"Ya estaba cerrado\" })",
+      "PowerShell(Remove-Item *)",
+      "PowerShell(Copy-Item *)",
+      "PowerShell(node scripts/build-cv-pdf.mjs \"$env:TEMP\\\\cv-extract\\\\1.png\" \"$env:TEMP\\\\cv-extract\\\\2.png\"; Get-Item public\\\\cv-andres-caceres.pdf, public\\\\andres.png | Select-Object Name, Length)"
     ]
   }
 }
