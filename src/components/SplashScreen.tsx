@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Phase = "matrix" | "logo" | "hud" | "online" | "exit" | "returning" | "done";
@@ -104,46 +104,64 @@ export default function SplashScreen() {
   const [phase, setPhase]           = useState<Phase>("matrix");
   const [glitch, setGlitch]         = useState(false);
   const [exitStarted, setExitStarted] = useState(false);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const dismissedRef = useRef(false);
+
+  const dismiss = useCallback(() => {
+    if (dismissedRef.current) return;
+    dismissedRef.current = true;
+    timersRef.current.forEach(clearTimeout);
+    setPhase("done");
+    document.body.style.overflow = "";
+    document.body.classList.remove("xcl-page-in");
+    try { sessionStorage.setItem("xcalex_intro", "1"); } catch (_) {}
+  }, []);
 
   /* Session gate + phase scheduler */
   useEffect(() => {
-    let active = true;
-
-    const dismiss = () => {
-      if (!active) return;
-      active = false;
-      setPhase("done");
-      document.body.style.overflow = "";
-      document.body.classList.remove("xcl-page-in");
-      try { sessionStorage.setItem("xcalex_intro", "1"); } catch (_) {}
-    };
-
     let hasVisited = false;
     try { hasVisited = !!sessionStorage.getItem("xcalex_intro"); } catch (_) {}
 
     if (hasVisited) {
       setPhase("returning" as Phase);
-      const t = setTimeout(dismiss, 2000);
-      return () => { active = false; clearTimeout(t); };
+      const t = setTimeout(dismiss, 1200);
+      timersRef.current = [t];
+      return () => clearTimeout(t);
     }
 
     document.body.style.overflow = "hidden";
 
     const timers = [
-      setTimeout(() => { if (active) setPhase("logo");   }, 1200),
-      setTimeout(() => { if (active) setPhase("hud");    }, 2700),
-      setTimeout(() => { if (active) setPhase("online"); }, 3700),
-      setTimeout(() => { if (active) setPhase("exit");   }, 4400),
-      setTimeout(() => { if (active) document.body.classList.add("xcl-page-in"); }, 4500),
-      setTimeout(dismiss, 5600),
+      setTimeout(() => setPhase("logo"),   900),
+      setTimeout(() => setPhase("hud"),    2100),
+      setTimeout(() => setPhase("online"), 2900),
+      setTimeout(() => setPhase("exit"),   3500),
+      setTimeout(() => document.body.classList.add("xcl-page-in"), 3600),
+      setTimeout(dismiss, 4500),
     ];
+    timersRef.current = timers;
     return () => {
-      active = false;
       timers.forEach(clearTimeout);
       document.body.style.overflow = "";
       document.body.classList.remove("xcl-page-in");
     };
-  }, []);
+  }, [dismiss]);
+
+  /* Click / key / touch anywhere skips straight to the site — never leaves
+     the user stuck staring at the intro if a timer stalls (throttled
+     background tab, slow device, etc). */
+  useEffect(() => {
+    if (phase === "done" || phase === "returning") return;
+    const skip = () => dismiss();
+    window.addEventListener("click", skip);
+    window.addEventListener("keydown", skip);
+    window.addEventListener("touchstart", skip);
+    return () => {
+      window.removeEventListener("click", skip);
+      window.removeEventListener("keydown", skip);
+      window.removeEventListener("touchstart", skip);
+    };
+  }, [phase, dismiss]);
 
   /* Exit strips: mount at X=0, then slide out after 1 frame */
   useEffect(() => {
@@ -239,7 +257,7 @@ export default function SplashScreen() {
   const showOnline = ["online","exit"].includes(phase);
 
   return (
-    <div className="fixed inset-0 z-[9999] overflow-hidden bg-[#02020a]">
+    <div className="fixed inset-0 z-[9999] overflow-hidden bg-[#02020a] cursor-pointer">
       <style>{CSS}</style>
 
       {/* ── Matrix rain ─────────────────────────────────────────────────────── */}
@@ -443,6 +461,16 @@ export default function SplashScreen() {
       {isExit && (
         <div className="xcl-flash absolute inset-0 pointer-events-none"
           style={{background:"linear-gradient(135deg,rgba(59,130,246,0.12),rgba(139,92,246,0.12))", zIndex:45}}/>
+      )}
+
+      {/* Skip hint — lets the user know they can click through immediately */}
+      {!isExit && (
+        <div className="absolute bottom-10 inset-x-0 flex justify-center pointer-events-none z-20"
+          style={{animation:"xcl-row 0.4s ease-out 1s both"}}>
+          <span className="font-mono text-[9px] tracking-[0.3em] text-slate-600 uppercase">
+            click para continuar
+          </span>
+        </div>
       )}
     </div>
   );

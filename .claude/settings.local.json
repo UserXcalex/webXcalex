@@ -11,7 +11,20 @@
       "PowerShell($conn = Get-NetTCPConnection -LocalPort 3517 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { Stop-Process -Id $conn.OwningProcess -Force -Confirm:$false; \"Servidor de prueba detenido\" } else { \"Ya estaba cerrado\" })",
       "PowerShell(Remove-Item *)",
       "PowerShell(Copy-Item *)",
-      "PowerShell(node scripts/build-cv-pdf.mjs \"$env:TEMP\\\\cv-extract\\\\1.png\" \"$env:TEMP\\\\cv-extract\\\\2.png\"; Get-Item public\\\\cv-andres-caceres.pdf, public\\\\andres.png | Select-Object Name, Length)"
+      "PowerShell(node scripts/build-cv-pdf.mjs \"$env:TEMP\\\\cv-extract\\\\1.png\" \"$env:TEMP\\\\cv-extract\\\\2.png\"; Get-Item public\\\\cv-andres-caceres.pdf, public\\\\andres.png | Select-Object Name, Length)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(echo \"TSC:$?\")",
+      "Bash(git status *)",
+      "Bash(node -e \"require\\('dotenv'\\).config\\({path:'.env.local'}\\)\")",
+      "Read(//c/Users/LENOVO/Desktop//**)",
+      "Read(//c/Users/LENOVO/Desktop/xcalex//**)",
+      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='node.exe'\\\\\" | Select-Object ProcessId,CommandLine | Format-List\")",
+      "Bash(powershell -NoProfile -Command \"Get-NetTCPConnection -LocalPort 3001 -State Listen | Select-Object -ExpandProperty OwningProcess\")",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 33268,25768 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Get-Process -Id 33268,25768 -ErrorAction SilentlyContinue\")",
+      "Bash(powershell -NoProfile -Command \"Get-NetTCPConnection -LocalPort 3001 -State Listen -ErrorAction SilentlyContinue\")"
     ]
   }
 }
